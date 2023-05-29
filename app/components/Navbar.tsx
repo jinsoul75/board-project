@@ -13,11 +13,10 @@ export default function Navbar() {
 const Nav = tw.nav`
  flex 
  p-5
-
+ text-violet-600
+ font-bold
 `;
 const StyledLink = tw(Link)`
-text-violet-600
-font-bold
 p-1
 mr-2
 `;
