@@ -2,7 +2,11 @@ import Button from "./Button";
 import tw from "tailwind-styled-components";
 import Link from "next/link";
 import Banner from "./Banner";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "../pages/api/auth/[...nextauth]";
+
 export default function Aside({ banner }: any) {
+  // const session = await getServerSession(authOptions);
   return (
     <StyledAside>
       {banner ? (
@@ -28,3 +32,4 @@ flex
 flex-col
 px-5
 `;
+// buttonName={<Link href={session?'/write':'/'}>글쓰기</Link>}

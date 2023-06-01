@@ -14,5 +14,3 @@ const StyledBtn = tw.button`
     border
     border-indigo-600
   `;
-
-// props에 따라 버튼 색상 변경하게 만들기

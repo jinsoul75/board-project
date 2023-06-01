@@ -1,7 +1,7 @@
 import { connectDB } from "@/util/database";
 import {ObjectId} from 'mongodb'
-
-export default async function Handler(req:any, res:any) {
+import { NextApiRequest,NextApiResponse } from 'next/types';
+export default async function Handler(req:NextApiRequest, res:NextApiResponse) {
   if (req.method === "POST") {
     if (req.body.title === "" || req.body.content==="") {
       return res.status(500).json("fill the title and content");

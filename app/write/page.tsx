@@ -1,14 +1,9 @@
 "use client";
 import tw from "tailwind-styled-components";
-import Button from "../components/Button";
-import Aside from "../components/Aside";
+import Button from "../../components/Button";
+import Aside from "../../components/Aside";
 
 export default function write() {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth();
-  const day = date.getDate();
-  console.log(`${year}-${month + 1}-${day}`);
   return (
     <Container>
       <Aside />
@@ -24,10 +19,10 @@ export default function write() {
           <StyledInput id='title' name='title' type='text'></StyledInput>
           <label htmlFor='content'>내용</label>
           <StyledTextarea id='content' name='content'></StyledTextarea>
-          <StyledInput
+          <input
             name='date'
-            defaultValue={`${year}-${month + 1}-${day}`}
-          ></StyledInput>
+            defaultValue={new Date().toLocaleString()}
+          ></input>
           <Button buttonName={"Submit"} />
         </form>
       </FormContainer>
