@@ -9,7 +9,7 @@ export default async function Handler(req:NextApiRequest , res: NextApiResponse)
     const session = await getServerSession(req,res,authOptions)
     const db = (await connectDB).db("forum");
     const foundOne = await db.collection('post').findOne({ _id: new ObjectId(req.body._id)})
-    if(foundOne.author === session.user.name){
+    if(foundOne.email === session.user.email){
       try {
         let db = (await connectDB).db("forum");
         let result = await db

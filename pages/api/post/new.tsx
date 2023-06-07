@@ -8,9 +8,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   let session = await getServerSession(req, res, authOptions);
+
   if(session){
+    req.body.email = session.user.email
     req.body.author = session.user.name
   }
+
   if (req.method === "POST") {
     if (req.body.title === "" || req.body.content === "") {
       return res.status(500).json("Title or Content is empty");
