@@ -9,15 +9,20 @@ export default async function Navbar() {
   const session = await getServerSession(authOptions);
   return (
     <Nav>
-      <StyledLink href='/'>Home</StyledLink>
-      <StyledLink href='/about'>About</StyledLink>
-      <StyledLink href='/mypage'>Mypage</StyledLink>
+      <div className='flex items-center'>
+        <StyledLink href='/'>Home</StyledLink>
+        <StyledLink href='/about'>About</StyledLink>
+        <StyledLink href='/mypage'>Mypage</StyledLink>
+      </div>
       {session === null ? (
-        <LoginBtn />
-      ) : (
         <div>
-          <span>{session.user.name}</span>
-          <img className='w-[20px] h-[20px]' src={session.user.image}></img>
+          <LoginBtn />
+        </div>
+      ) : (
+        <div className='flex items-center'>
+          <span className='font-bold'>{session.user.name}</span>
+          <span className='mr-[10px]'>님 환영합니다!</span>
+          <img className='w-[30px] h-[30px] rounded-full mr-[10px]' src={session.user.image}></img>
           <LogoutBtn />
         </div>
       )}
@@ -27,10 +32,14 @@ export default async function Navbar() {
 const Nav = tw.nav`
  flex 
  p-5
- text-violet-600
- font-bold
+ bg-soul-gray
+ text-soul-black
+ justify-between
+ h-[70px]
 `;
 const StyledLink = tw(Link)`
-p-1
-mr-2
+p-2
+mr-5
+hover:border-b-4 border-soul-black 
+hover:font-bold
 `;
