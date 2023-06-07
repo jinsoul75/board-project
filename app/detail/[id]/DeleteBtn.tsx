@@ -7,6 +7,7 @@ export default function DetailLink({ result }: any) {
   const router = useRouter();
   return (
     <button
+      className='border border-soul-black rounded py-1 px-5'
       onClick={() => {
         axios
           .post("/api/post/delete", {
@@ -18,7 +19,7 @@ export default function DetailLink({ result }: any) {
             }
           })
           .catch(() => {
-            alert("삭제할 권한이 없습니다.")
+            alert("삭제할 권한이 없습니다.");
           });
       }}
     >

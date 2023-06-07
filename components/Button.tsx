@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components";
 
-export default function Button({ buttonName, colorName }:any) {
-  return <StyledBtn className={colorName}>{buttonName}</StyledBtn>;
+export default function Button({ buttonName }:any) {
+  return <StyledBtn>{buttonName}</StyledBtn>;
 }
 
 const StyledBtn = tw.button`
@@ -11,6 +11,9 @@ const StyledBtn = tw.button`
     h-20
     text-xs
     mb-3
+    bg-soul-gray
     border
-    border-indigo-600
+    rounded-xl
+    border-transparent
+    shadow-lg
   `;
