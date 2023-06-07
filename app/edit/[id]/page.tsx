@@ -10,7 +10,7 @@ export default async function Edit(props:any) {
   return (
     <div>
       <h4>수정페이지</h4>
-      <form action='/api/post/edit' method='POST'>
+      <form action='/api/post/add_email' method='POST'>
         <label htmlFor='title'>제목</label>
         <input
           id='title'
