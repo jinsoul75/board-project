@@ -1,9 +1,15 @@
-"use client";
 import tw from "tailwind-styled-components";
 import Button from "../../components/Button";
 import Aside from "../../components/Aside";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { redirect } from 'next/navigation';
 
-export default function write() {
+export default async function write() {
+  const session = await getServerSession(authOptions);
+ if(!session){
+  redirect('/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F')
+ }
   return (
     <Container>
       <Aside />
@@ -46,6 +52,7 @@ resize-none
 
 const Container = tw.div`
   flex
+  p-[20px]
 `;
 
 const FormContainer = tw.div`
