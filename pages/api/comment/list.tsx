@@ -6,7 +6,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const id: string = req.query.id as string; 
   const db = (await connectDB).db("forum");
-  let result = await db.collection("comment").find({parent: new ObjectId(req.query.id)}).toArray();
+  let result = await db.collection("comment").find({parent: new ObjectId(id)}).toArray();
   res.status(200).json(result);
 }
