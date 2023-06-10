@@ -7,20 +7,25 @@ export default function Comment(props: any) {
   let [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/comment/list?id=${props._id}`).then((res) => {
-      setData(res.data);
-    });
-  }, [data]);
+    if (comment === "") {
+      axios.get(`/api/comment/list?id=${props._id}`).then((res) => {
+        setData(res.data);
+      });
+    }
+  }, [comment]);
+
   return (
     <div>
       <div>댓글목록</div>
       <hr></hr>
       {data.length > 0
-        ? data.map((d:any, i) => (
+        ? data.map((d: any, i) => (
             <div key={i}>
               <div>{d.content}</div>
               <div>{d.author}</div>
               <div>{d.date}</div>
+              <button className='border border-black'>수정</button>
+              <button className='border border-black'>삭제</button>
             </div>
           ))
         : "댓글 로딩중"}
@@ -31,12 +36,16 @@ export default function Comment(props: any) {
         }}
         value={comment}
       />
-      
+
       <button
         onClick={() => {
           axios
-          .post("/api/comment/new", { comment: comment, _id: props._id, date:new Date().toLocaleString()})
-          .then(()=>setComment(''));
+            .post("/api/comment/new", {
+              comment: comment,
+              _id: props._id,
+              date: new Date().toLocaleString(),
+            })
+            .then(() => setComment(""));
         }}
       >
         댓글전송
