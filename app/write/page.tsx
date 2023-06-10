@@ -29,6 +29,8 @@ export default async function write() {
             name='date'
             defaultValue={new Date().toLocaleString()}
           ></input>
+          <input name='likeCount' defaultValue={0}></input>
+          <input name='commentCount' defaultValue={0}></input>
           <Button buttonName={"Submit"} />
         </form>
       </FormContainer>

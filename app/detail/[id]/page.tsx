@@ -7,6 +7,7 @@ import tw from "tailwind-styled-components";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import Comment from "./Comment";
+import Like from "./Like";
 
 export default async function Detail(props: any) {
   const session: any = await getServerSession(authOptions);
@@ -15,6 +16,15 @@ export default async function Detail(props: any) {
     .collection("post")
     .findOne({ _id: new ObjectId(props.params.id) });
   result._id = result._id.toString();
+  let foundOne: any = null; 
+  if (session) { 
+    foundOne = await db.collection("like").findOne({ userId: new ObjectId(session.user.id),pageId: new ObjectId(result._id) });
+    if(foundOne){
+      foundOne._id = foundOne._id.toString();
+      foundOne.pageId = foundOne.pageId.toString();
+      foundOne.userId = foundOne.userId.toString();
+    }
+  }
 
   return (
     <Container>
@@ -23,8 +33,9 @@ export default async function Detail(props: any) {
         <h4>{result.title}</h4>
         <p>{result.content}</p>
         <p>{result.category}</p>
-        <Comment _id={result._id}/>
-        {session.user.email === result.email ? (
+        <Comment _id={result._id} />
+        <Like isLike={foundOne} pageId={result._id}/>
+        {session && session.user.email === result.email ? (
           <>
             <Link href={`/edit/${result._id}`}>
               <button className='border border-soul-black rounded py-1 px-5'>
