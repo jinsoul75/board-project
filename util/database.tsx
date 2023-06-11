@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb'
 const url = 'mongodb+srv://user1:bstx1320@cluster0.vwcqeen.mongodb.net/'
-const options = { useNewUrlParser: true }
+const options:any = { useNewUrlParser: true }
 let connectDB:any
 
 if (process.env.NODE_ENV === 'development') {

@@ -12,7 +12,7 @@ export default async function Navbar() {
       <div className='flex items-center'>
         <StyledLink href='/'>Home</StyledLink>
         <StyledLink href='/about'>About</StyledLink>
-        <StyledLink href='/mypage'>Mypage</StyledLink>
+        <StyledLink prefetch={false} href='/mypage'>Mypage</StyledLink>
       </div>
       {session === null ? (
         <div>

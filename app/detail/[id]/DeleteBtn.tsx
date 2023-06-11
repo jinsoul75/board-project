@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
-
 export default function DetailLink({ result }: any) {
   const router = useRouter();
   return (
