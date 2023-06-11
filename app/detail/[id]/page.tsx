@@ -37,7 +37,7 @@ export default async function Detail(props: any) {
         <Like isLike={foundOne} pageId={result._id}/>
         {session && session.user.email === result.email ? (
           <>
-            <Link href={`/edit/${result._id}`}>
+            <Link prefetch={false} href={`/edit/${result._id}`}>
               <button className='border border-soul-black rounded py-1 px-5'>
                 수정 버튼
               </button>

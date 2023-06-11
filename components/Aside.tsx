@@ -2,11 +2,8 @@ import Button from "./Button";
 import tw from "tailwind-styled-components";
 import Link from "next/link";
 import Banner from "./Banner";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "../pages/api/auth/[...nextauth]";
 
 export default function Aside({ banner }: any) {
-  // const session = await getServerSession(authOptions);
   return (
     <StyledAside>
       {banner ? (
@@ -14,13 +11,20 @@ export default function Aside({ banner }: any) {
       ) : (
         <>
           <Button
-            colorName={"bg-red-500"}
-            buttonName={<Link href='/write'>글쓰기</Link>}
+            buttonName={<Link href='/list/1'>📋 전체글</Link>}
           ></Button>
-          <Button colorName={"bg-emerald-600"} buttonName={"전체글"}></Button>
-          <Button colorName={"bg-amber-400"} buttonName={"프론트"}></Button>
-          <Button colorName={"bg-sky-500"} buttonName={"백엔드"}></Button>
-          <Button colorName={"bg-fuchsia-600"} buttonName={"좋아요 한 글"}></Button>
+          <Button
+            buttonName={<Link href='/frontend'>🖥️ 프론트엔드</Link>}
+          ></Button>
+          <Button
+            buttonName={<Link href='/backend'>⚙️ 백엔드</Link>}
+          ></Button>
+          <Button
+            buttonName={<Link href='/my-likes'>👍🏻 좋아요</Link>}
+          ></Button>
+          <button className='bg-indigo-500	text-white h-10 rounded-xl'>
+            <Link href='/write'>✏️ 작성하기</Link>
+          </button>
         </>
       )}
     </StyledAside>
@@ -30,6 +34,4 @@ export default function Aside({ banner }: any) {
 const StyledAside = tw.aside`
 flex
 flex-col
-px-5
 `;
-// buttonName={<Link href={session?'/write':'/'}>글쓰기</Link>}
