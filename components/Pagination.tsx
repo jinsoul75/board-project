@@ -8,7 +8,6 @@ export default function Pagination({ totalPosts, currentPage, pageSize }) {
     const links = [];
 
     for (let i = 1; i <= totalPages; i++) {
-
       links.push(
         <Link key={i} href={`/list/${i}`} className={i === currentPage ? "text-red" : ""}>
           {i}

@@ -6,17 +6,17 @@ import tw from "tailwind-styled-components";
 export default async function Frontend() {
   const db = (await connectDB).db("forum");
   let result = await db.collection("post").find().toArray();
-  result = result.map((d) => {
-    d._id = d._id.toString();
+  result = result.map((d: any) => {
+    d._id = d._id.toString() as string;
     return d;
   });
-  const newResult = result.filter(d => d.category === 'FRONTEND')
+  const newResult = result.filter((d) => d.category === "FRONTEND");
 
   return (
     <Main>
       <Aside />
       <ListItem result={newResult} />
-      <Aside banner={'banner'} />
+      <Aside banner={"banner"} />
     </Main>
   );
 }
@@ -25,4 +25,4 @@ const Main = tw.main`
   flex
   p-[20px]
   overflow-auto
-`
+`;
