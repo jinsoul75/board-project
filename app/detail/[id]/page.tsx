@@ -11,15 +11,23 @@ import Like from "./Like";
 
 export default async function Detail(props: any) {
   const session: any = await getServerSession(authOptions);
+
   const db = (await connectDB).db("forum");
-  let result = await db
+
+  let result:any = await db
     .collection("post")
     .findOne({ _id: new ObjectId(props.params.id) });
   result._id = result._id.toString();
-  let foundOne: any = null; 
-  if (session) { 
-    foundOne = await db.collection("like").findOne({ userId: new ObjectId(session.user.id),pageId: new ObjectId(result._id) });
-    if(foundOne){
+
+  let foundOne: any = null;
+  if (session) {
+    foundOne = await db
+      .collection("like")
+      .findOne({
+        userId: new ObjectId(session.user.id),
+        pageId: new ObjectId(result._id),
+      });
+    if (foundOne) {
       foundOne._id = foundOne._id.toString();
       foundOne.pageId = foundOne.pageId.toString();
       foundOne.userId = foundOne.userId.toString();
@@ -34,7 +42,7 @@ export default async function Detail(props: any) {
         <p>{result.content}</p>
         <p>{result.category}</p>
         <Comment _id={result._id} />
-        <Like isLike={foundOne} pageId={result._id}/>
+        <Like isLike={foundOne} pageId={result._id} />
         {session && session.user.email === result.email ? (
           <>
             <Link prefetch={false} href={`/edit/${result._id}`}>

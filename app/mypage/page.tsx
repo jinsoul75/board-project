@@ -5,15 +5,17 @@ import { connectDB } from "@/util/database";
 import tw from "tailwind-styled-components";
 import ListItem from "@/components/ListItem";
 export default async function Mypage() {
-  const session :any = await getServerSession(authOptions);
+  const session: any = await getServerSession(authOptions);
   const db = (await connectDB).db("forum");
   let result = await db.collection("post").find().toArray();
   result = result.map((d: any) => {
     d._id = d._id.toString();
     return d;
   });
-  const myResult = result.filter((d:any) => d.email === session.user.email);
-
+  let myResult = null;
+  if (session) {
+    myResult = result.filter((d: any) => d.email === session.user.email);
+  }
   return (
     <div className='p-[20px]'>
       {session === null ? (

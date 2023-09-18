@@ -12,7 +12,9 @@ export default async function Navbar() {
       <div className='flex items-center'>
         <StyledLink href='/'>Home</StyledLink>
         <StyledLink href='/about'>About</StyledLink>
-        <StyledLink prefetch={false} href='/mypage'>Mypage</StyledLink>
+        <StyledLink prefetch={false} href='/mypage'>
+          Mypage
+        </StyledLink>
       </div>
       {session === null ? (
         <div>
@@ -20,9 +22,12 @@ export default async function Navbar() {
         </div>
       ) : (
         <div className='flex items-center'>
-          <span className='font-bold'>{session.user.name}</span>
+          <span className='font-bold'>{(session as any)?.user?.name}</span>
           <span className='mr-[10px]'>님 환영합니다!</span>
-          <img className='w-[30px] h-[30px] rounded-full mr-[10px]' src={session.user.image}></img>
+          <img
+            className='w-[30px] h-[30px] rounded-full mr-[10px]'
+            src={(session as any)?.user?.image}
+          ></img>
           <LogoutBtn />
         </div>
       )}
