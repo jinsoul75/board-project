@@ -5,10 +5,10 @@ import LogoutBtn from "../app/LogoutBtn";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
-export default async function Navbar() {
-  const session = await getServerSession(authOptions);
+export default async function Header() {
+  const session:unknown = await getServerSession(authOptions);
   return (
-    <Nav>
+    <HeaderWrapper>
       <div className='flex items-center'>
         <StyledLink href='/'>Home</StyledLink>
         <StyledLink href='/about'>About</StyledLink>
@@ -31,10 +31,10 @@ export default async function Navbar() {
           <LogoutBtn />
         </div>
       )}
-    </Nav>
+    </HeaderWrapper>
   );
 }
-const Nav = tw.nav`
+const HeaderWrapper = tw.header`
  flex 
  p-5
  bg-soul-gray

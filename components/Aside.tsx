@@ -1,6 +1,7 @@
-import Button from "./Button";
-import tw from "tailwind-styled-components";
 import Link from "next/link";
+import tw from "tailwind-styled-components";
+
+import Button from "./Button";
 import Banner from "./Banner";
 
 export default function Aside({ banner }: any) {
