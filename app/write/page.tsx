@@ -12,7 +12,7 @@ export default async function write() {
  }
   return (
     <Container>
-      <Aside />
+      <Aside banner={null}/>
       <FormContainer>
         <h4>새글작성</h4>
         <form action='/api/post/new' method='POST'>

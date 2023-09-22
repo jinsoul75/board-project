@@ -1,14 +1,15 @@
-import { connectDB } from "@/util/database";
-import ListItem from "../../components/ListItem";
-import Aside from "../../components/Aside";
-import tw from "tailwind-styled-components";
-import Pagination from "@/components/Pagination";
+import { connectDB } from '@/util/database';
+import ListItem from '../../components/ListItem';
+import Aside from '../../components/Aside';
+import tw from 'tailwind-styled-components';
+import Pagination from '@/components/Pagination';
+import { ObjectId } from 'mongodb';
 
 export default async function List() {
-  const db = (await connectDB).db("forum");
-  let result = await db.collection("post").find().toArray();
-  result = result.map((d: any) => {
-    d._id = d._id.toString();
+  const db = (await connectDB).db('forum');
+  let result = await db.collection('post').find().toArray();
+  result = result.map((d) => {
+    d._id = d._id.toString() as unknown as ObjectId;
     return d;
   });
   const splitResult = [...result.slice(0, 10)];
@@ -16,18 +17,14 @@ export default async function List() {
   const currentPage = 1;
   return (
     <Main>
-      <Aside />
+      <Aside banner={null} />
       <Container>
         {splitResult.map((a, i) => (
           <ListItem key={i} result={splitResult[i]} />
         ))}
-        <Pagination
-          totalPosts={result.length}
-          currentPage={currentPage}
-          pageSize={pageSize}
-        />
+        <Pagination totalPosts={result.length} currentPage={currentPage} pageSize={pageSize} />
       </Container>
-      <Aside banner={"banner"} />
+      <Aside banner={'banner'} />
     </Main>
   );
 }

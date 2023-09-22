@@ -1,18 +1,20 @@
-import Link from "next/link";
-import tw from "tailwind-styled-components";
-import LoginBtn from "../app/LoginBtn";
-import LogoutBtn from "../app/LogoutBtn";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import Link from 'next/link';
+import tw from 'tailwind-styled-components';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import LoginBtn from '../app/LoginBtn';
+import LogoutBtn from '../app/LogoutBtn';
 
 export default async function Header() {
-  const session:unknown = await getServerSession(authOptions);
+  const session: { user: { image: string; name: string } } | null =
+    await getServerSession(authOptions);
+
   return (
     <HeaderWrapper>
-      <div className='flex items-center'>
-        <StyledLink href='/'>Home</StyledLink>
-        <StyledLink href='/about'>About</StyledLink>
-        <StyledLink prefetch={false} href='/mypage'>
+      <div className="flex items-center">
+        <StyledLink href="/">Home</StyledLink>
+        <StyledLink href="/about">About</StyledLink>
+        <StyledLink prefetch={false} href="/mypage">
           Mypage
         </StyledLink>
       </div>
@@ -21,13 +23,10 @@ export default async function Header() {
           <LoginBtn />
         </div>
       ) : (
-        <div className='flex items-center'>
-          <span className='font-bold'>{(session as any)?.user?.name}</span>
-          <span className='mr-[10px]'>님 환영합니다!</span>
-          <img
-            className='w-[30px] h-[30px] rounded-full mr-[10px]'
-            src={(session as any)?.user?.image}
-          ></img>
+        <div className="flex items-center">
+          <span className="font-bold">{session.user.name}</span>
+          <span className="mr-[10px]">님 환영합니다!</span>
+          <img className="w-[30px] h-[30px] rounded-full mr-[10px]" src={session.user.image}></img>
           <LogoutBtn />
         </div>
       )}

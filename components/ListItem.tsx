@@ -1,38 +1,51 @@
-'use client'
-import Link from "next/link";
-import tw from "tailwind-styled-components";
+'use client';
+import Link from 'next/link';
+import tw from 'tailwind-styled-components';
 
-export default function ListItem({ result }: any) {
+export interface Post {
+  author: string;
+  category: string;
+  commentCount: number;
+  content: string;
+  date: string;
+  email: string;
+  likeCount: number;
+  title: string;
+  _id: string;
+}
+
+interface PostListProps {
+  result: Post[];
+}
+
+export default function ListItem({ result }: PostListProps) {
+
   return (
     <StyledUl>
-      {result.map((_: any, i: any) => (
-        <StyledListItem key={i}>
-          <div className='p-[20px]'>
-            {result[i].category === "FRONTEND" ? (
-              <div className='font-bold text-orange-600 mb-0.5'>
-                {result[i].category}
-              </div>
+      {result.map((post: Post, index: number) => (
+        <StyledListItem key={post._id}>
+          <div className="p-[20px]">
+            {post.category === 'FRONTEND' ? (
+              <div className="font-bold text-orange-600 mb-0.5">{post.category}</div>
             ) : (
-              <div className='font-bold text-emerald-600 mb-0.5'>
-                {result[i].category}
-              </div>
+              <div className="font-bold text-emerald-600 mb-0.5">{post.category}</div>
             )}
-            <Link prefetch={false} href={`/detail/${result[i]._id}`}>
-              <div className='flex justify-between mb-3'>
-                <div className='font-bold text-xl'>{result[i].title}</div>
-                <div>{result[i].author}</div>
+            <Link prefetch={false} href={`/detail/${post._id}`}>
+              <div className="flex justify-between mb-3">
+                <div className="font-bold text-xl">{post.title}</div>
+                <div>{post.author}</div>
                 <div>
-                  <span className='mr-[10px]'>댓글 수{result[i].commentCount}</span>
-                  <span>좋아요 수{result[i].likeCount}</span>
+                  <span className="mr-[10px]">댓글 수{post.commentCount}</span>
+                  <span>좋아요 수{post.likeCount}</span>
                 </div>
               </div>
-              <p className='mb-3'>{result[i].content.slice(0, 198)}</p>
+              <p className="mb-3">{post.content.slice(0, 198)}</p>
             </Link>
-            <div className='flex justify-end'>
-              <div>{result[i].date}</div>
+            <div className="flex justify-end">
+              <div>{post.date}</div>
             </div>
           </div>
-          {i === result.length - 1 ? null : <hr></hr>}
+          { index === result.length - 1 ? null : <hr></hr>}
         </StyledListItem>
       ))}
     </StyledUl>

@@ -6,7 +6,7 @@ export default async function Home() {
   return (
     <>
       <Main>
-        <Aside />
+        <Aside banner={null} />
         <div>뭔가 멋진 메인 사진을 걸고 싶어요 캐러셀같은거 넣으면 좋겠다</div>
         <Aside banner={"banner"} />
       </Main>

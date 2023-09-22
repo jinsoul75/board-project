@@ -7,11 +7,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  let session:any = await getServerSession(req, res, authOptions);
+  let session = await getServerSession(req, res, authOptions);
 
   if(session){
-    req.body.email = session.user.email
-    req.body.author = session.user.name
+    req.body.email = session?.user?.email
+    req.body.author = session?.user?.name
   }
 
   if (req.method === "POST") {
@@ -20,11 +20,7 @@ export default async function handler(
     }
     try {
       const db = (await connectDB).db("forum");
-      let result = await db
-        .collection("post")
-        .find({ title: req.body.title })
-        .toArray();
-      result = await db.collection("post").insertOne(req.body);
+      let result = await db.collection("post").insertOne(req.body);
       res.redirect(302, "/");
     } catch (error) {
       console.error();

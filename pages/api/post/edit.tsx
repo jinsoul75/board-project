@@ -1,6 +1,7 @@
 import { connectDB } from "@/util/database";
 import {ObjectId} from 'mongodb'
 import { NextApiRequest,NextApiResponse } from 'next/types';
+
 export default async function Handler(req:NextApiRequest, res:NextApiResponse) {
   if (req.method === "POST") {
     if (req.body.title === "" || req.body.content==="") {
