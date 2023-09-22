@@ -8,12 +8,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session: any = await getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
   const db = (await connectDB).db("forum");
 
   let likeInfo = {
     pageId: new ObjectId(req.body.pageId),
-    userId: new ObjectId(session.user.id),
+    userId: new ObjectId(session?.user?.id),
   };
 
   const foundOneLike = await db

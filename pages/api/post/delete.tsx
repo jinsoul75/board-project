@@ -6,10 +6,10 @@ import { authOptions } from '../auth/[...nextauth]';
 
 export default async function Handler(req:NextApiRequest , res: NextApiResponse) {
   if (req.method === "POST") {
-    const session:any = await getServerSession(req,res,authOptions)
+    const session = await getServerSession(req,res,authOptions)
     const db = (await connectDB).db("forum");
     const foundOne = await db.collection('post').findOne({ _id: new ObjectId(req.body._id)})
-    if(foundOne.email === session.user.email){
+    if(foundOne?.email === session?.user?.email){
       try {
         let db = (await connectDB).db("forum");
         let result = await db

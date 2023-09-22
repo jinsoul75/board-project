@@ -1,11 +1,13 @@
-import { connectDB } from "@/util/database";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import NextAuth from "next-auth";
-import KakaoProvider from "next-auth/providers/kakao";
-const clientId: string = process.env.KAKAO_CLIENT_ID || "";
-const clientSecret: string = process.env.KAKAO_CLIENT_SECRET || "";
+import { connectDB } from '@/util/database';
+import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 
-export const authOptions: any = {
+import NextAuth from 'next-auth';
+import KakaoProvider from 'next-auth/providers/kakao';
+
+const clientId: string = process.env.KAKAO_CLIENT_ID || '';
+const clientSecret: string = process.env.KAKAO_CLIENT_SECRET || '';
+
+export const authOptions:any = {
   providers: [
     KakaoProvider({
       clientId: clientId,
@@ -27,7 +29,7 @@ export const authOptions: any = {
     },
   },
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(connectDB),
