@@ -1,14 +1,19 @@
-import { MongoClient } from 'mongodb'
-const url = process.env.DB_CONN_STRING as string;
-const options:any = { useNewUrlParser: true }
-let connectDB:Promise<MongoClient>
+import { MongoClient } from "mongodb";
 
-if (process.env.NODE_ENV === 'development') {
-  if (!global._mongo) {
-    global._mongo = new MongoClient(url, options).connect()
+const url = process.env.DB_CONN_STRING as string;
+const options: any = { useNewUrlParser: true };
+let connectDB: Promise<MongoClient>;
+declare global {
+  namespace globalThis {
+    var _mongo: Promise<MongoClient>;
   }
-  connectDB = global._mongo
-} else {
-  connectDB = new MongoClient(url, options).connect()
 }
-export { connectDB }
+if (process.env.NODE_ENV === "development") {
+  if (!globalThis._mongo) {
+    globalThis._mongo = new MongoClient(url, options).connect();
+  }
+  connectDB = globalThis._mongo;
+} else {
+  connectDB = new MongoClient(url, options).connect();
+}
+export { connectDB };

@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-export default function Comment(props: any) {
+
+interface DataType {
+  content : string;
+  author: string;
+  date: string;
+}
+
+export default function Comment(props: { _id: number }) {
   let [comment, setComment] = useState("");
   let [data, setData] = useState([]);
 
@@ -19,7 +26,7 @@ export default function Comment(props: any) {
       <div>댓글목록</div>
       <hr></hr>
       {data.length > 0
-        ? data.map((d: any, i) => (
+        ? data.map((d:DataType, i) => (
             <div key={i}>
               <div>{d.content}</div>
               <div>{d.author}</div>

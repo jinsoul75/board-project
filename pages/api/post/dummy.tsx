@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from 'next/types';
 import { connectDB } from '../../../util/database';
 
-const handler = async (req: any, res: any) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const db = (await connectDB).db('forum');
     await db.collection('post').insertOne(req.body);

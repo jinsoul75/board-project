@@ -1,6 +1,10 @@
 import tw from "tailwind-styled-components";
 
-export default function Button({ buttonName }:any) {
+interface ButtonProps {
+  buttonName: string | JSX.Element;
+}
+
+export default function Button({ buttonName }:ButtonProps) {
   return <StyledBtn>{buttonName}</StyledBtn>;
 }
 
