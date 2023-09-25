@@ -2,6 +2,8 @@ import tw from "tailwind-styled-components";
 
 interface ButtonProps {
   buttonName: string | JSX.Element;
+  colorName?: string;
+  type?:string;
 }
 
 export default function Button({ buttonName }:ButtonProps) {

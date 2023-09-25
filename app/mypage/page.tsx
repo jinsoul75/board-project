@@ -1,11 +1,9 @@
 import { getServerSession } from 'next-auth';
-import tw from 'tailwind-styled-components';
-import { ObjectId } from 'mongodb';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/util/database';
 import Button from '@/components/Button';
-import ListItem from '@/components/ListItem';
+import ListItem, { Post } from '@/components/ListItem';
 
 interface Sessiontype {
   user: {
@@ -19,12 +17,12 @@ interface Sessiontype {
 export default async function Mypage() {
   const session: Sessiontype | null = await getServerSession(authOptions);
   const db = (await connectDB).db('forum');
-  let result = await db.collection('post').find().toArray();
+  let result:Post[] = await db.collection<Post>('post').find().toArray();
   result = result.map((d) => {
-    d._id = d._id.toString() as unknown as ObjectId;
+    d._id = d._id.toString() as unknown as string;
     return d;
   });
-  let myResult = null;
+  let myResult:Post[] = [];
   if (session) {
     myResult = result.filter((d) => d.email === session.user?.email);
   }

@@ -1,18 +1,18 @@
-import { connectDB } from "@/util/database";
-import ListItem from "../../components/ListItem";
-import Aside from "../../components/Aside";
-import tw from "tailwind-styled-components";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { ObjectId } from "mongodb";
+import { connectDB } from '@/util/database';
+import ListItem, { Post } from '../../components/ListItem';
+import Aside from '../../components/Aside';
+import tw from 'tailwind-styled-components';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { ObjectId } from 'mongodb';
 
 export default async function MyLikes() {
-  const session : { user: { id: string } } | null = await getServerSession(authOptions);
+  const session: { user: { id: string } } | null = await getServerSession(authOptions);
 
   //좋아요 데이터
-  const db = (await connectDB).db("forum");
+  const db = (await connectDB).db('forum');
   let likes = await db
-    .collection("like")
+    .collection('like')
     .find({ userId: new ObjectId(session?.user.id) })
     .toArray();
   likes = likes.map((d) => {
@@ -21,9 +21,9 @@ export default async function MyLikes() {
   });
 
   //전체 데이터 ?
-  let result = await db.collection("post").find().toArray();
+  let result: Post[] = await db.collection<Post>('post').find().toArray();
   result = result.map((d) => {
-    d._id = d._id.toString() as unknown as ObjectId;
+    d._id = d._id.toString() as unknown as string;
     return d;
   });
 
@@ -34,9 +34,9 @@ export default async function MyLikes() {
 
   return (
     <Main>
-      <Aside />
+      <Aside banner={null} />
       <ListItem result={newResult} />
-      <Aside banner={"banner"} />
+      <Aside banner={'banner'} />
     </Main>
   );
 }
