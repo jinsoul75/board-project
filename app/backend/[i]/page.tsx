@@ -4,14 +4,14 @@ import Aside from '../../../components/Aside';
 import tw from 'tailwind-styled-components';
 import Pagination from '@/components/Pagination';
 
-export default async function List({ params }: { params: { i: string } }) {
+export default async function Backend({ params }: { params: { i: string } }) {
   const db = (await connectDB).db('forum');
-
   let result: Post[] = await db.collection<Post>('post').find().sort({ 'date': -1 }).toArray();
   result = result.map((d) => {
     d._id = d._id.toString() as unknown as string;
     return d;
   });
+  const newResult = result.filter((d) => d.category === 'BACKEND');
 
   const pageSize = 10;
   const currentPage = Number(params.i);
@@ -21,7 +21,7 @@ export default async function List({ params }: { params: { i: string } }) {
     <Main>
       <Aside banner={null} />
       <Container>
-        <ListItem result={result.slice(startIndex, startIndex + pageSize)} />
+        <ListItem result={newResult.slice(startIndex, startIndex + pageSize)} />
         <Pagination totalPosts={result.length} currentPage={currentPage} pageSize={pageSize} />
       </Container>
       <Aside banner={'banner'} />
@@ -30,9 +30,9 @@ export default async function List({ params }: { params: { i: string } }) {
 }
 
 const Main = tw.main`
-  flex
-  p-[20px]
-  mb-[40px]
+flex
+p-[20px]
+mb-[40px]
 `;
 
 const Container = tw.div`
