@@ -1,12 +1,12 @@
 import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
 import { NextApiRequest,NextApiResponse } from 'next/types';
-import { getServerSession } from 'next-auth';
+import { getServerSession, Session } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
 
 export default async function Handler(req:NextApiRequest , res: NextApiResponse) {
   if (req.method === "POST") {
-    const session = await getServerSession(req,res,authOptions)
+    const session:Session|null = await getServerSession(req,res,authOptions)
     const db = (await connectDB).db("forum");
     const foundOne = await db.collection('post').findOne({ _id: new ObjectId(req.body._id)})
     if(foundOne?.email === session?.user?.email){

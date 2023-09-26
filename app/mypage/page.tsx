@@ -17,7 +17,7 @@ interface Sessiontype {
 export default async function Mypage() {
   const session: Sessiontype | null = await getServerSession(authOptions);
   const db = (await connectDB).db('forum');
-  let result:Post[] = await db.collection<Post>('post').find().toArray();
+  let result:Post[] = await db.collection<Post>('post').find().sort({date:-1}).toArray();
   result = result.map((d) => {
     d._id = d._id.toString() as unknown as string;
     return d;
@@ -29,7 +29,7 @@ export default async function Mypage() {
   return (
     <div className="p-[20px]">
       {session === null ? (
-        <div>로그인해줘잉</div>
+        <div>로그인이 필요한 서비스입니다.</div>
       ) : (
         <div>
           <div className="flex flex-col justify-center items-center">
