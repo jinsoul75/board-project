@@ -4,7 +4,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/util/database';
 import Button from '@/components/Button';
 import ListItem, { Post } from '@/components/ListItem';
-
+import Pagination from '@/components/Pagination';
 interface Sessiontype {
   user: {
     name: string;
@@ -26,6 +26,7 @@ export default async function Mypage() {
   if (session) {
     myResult = result.filter((d) => d.email === session.user?.email);
   }
+
   return (
     <div className="p-[20px]">
       {session === null ? (
@@ -34,8 +35,8 @@ export default async function Mypage() {
         <div>
           <div className="flex flex-col justify-center items-center">
             <img className="w-[100px] h-[100px] rounded-full" src={session.user.image}></img>
-            <div className="mt-[20px]">{session.user.name}</div>
-            <div> 내정보 수정 </div>
+            <div className="mt-4 text-3xl font-bold text-blue-600">{session.user.name}</div>
+            <div className="mt-4">{session.user.email}</div> 
           </div>
           {session.user.email === null ? (
             <form action="/api/post/add_email" method="POST">

@@ -45,7 +45,7 @@ export default async function Detail(props: { params: { id: string } }) {
 
   return (
     <Container>
-      <Aside banner={null} />
+      <Aside />
       <div className="flex flex-col p-[20px]">
         <h4>{result?.title}</h4>
         <p>{result?.content}</p>
