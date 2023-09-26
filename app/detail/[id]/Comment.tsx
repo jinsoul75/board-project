@@ -1,20 +1,25 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 interface DataType {
-  content : string;
+  content: string;
   author: string;
   date: string;
+  _id: string;
 }
 
 export default function Comment(props: { _id: number }) {
-  let [comment, setComment] = useState("");
-  let [data, setData] = useState([]);
+  const [comment, setComment] = useState('');
+  const [data, setData] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedValue, setEditedValue] = useState('');
+
+  const editMode = isEditing ? '수정 완료' : '수정';
 
   useEffect(() => {
-    if (comment === "") {
+    if (comment === '') {
       axios.get(`/api/comment/list?id=${props._id}`).then((res) => {
         setData(res.data);
       });
@@ -26,36 +31,64 @@ export default function Comment(props: { _id: number }) {
       <div>댓글목록</div>
       <hr></hr>
       {data.length > 0
-        ? data.map((d:DataType, i) => (
+        ? data.map((d: DataType, i) => (
             <div key={i}>
-              <div>{d.content}</div>
+              {isEditing ? (
+                <input defaultValue={d.content} onChange={(e) => setEditedValue(e.target.value)} />
+              ) : (
+                <div>{d.content}</div>
+              )}
               <div>{d.author}</div>
               <div>{d.date}</div>
-              <button className='border border-black'>수정</button>
-              <button className='border border-black'>삭제</button>
+              <button
+                onClick={() => {
+                  if (isEditing) {
+                    axios.post('/api/comment/edit', {
+                      comment: editedValue,
+                      _id: props._id,
+                      date: new Date().toLocaleString(),
+                    });
+                    setIsEditing(false);
+                  } else {
+                    setIsEditing(true);
+                  }
+                }}
+                className="border border-black"
+              >
+                {editMode}
+              </button>
+              <button
+                onClick={() => {
+                  axios.post('/api/comment/delete', {
+                    _id: d._id,
+                  });
+                }}
+                className="border border-black"
+              >
+                삭제
+              </button>
             </div>
           ))
-        : "댓글 로딩중"}
+        : '작성된 댓글이 없습니다.'}
       <input
-        className='border'
+        className="border"
         onChange={(e) => {
           setComment(e.target.value);
         }}
         value={comment}
       />
-
       <button
         onClick={() => {
           axios
-            .post("/api/comment/new", {
+            .post('/api/comment/new', {
               comment: comment,
               _id: props._id,
               date: new Date().toLocaleString(),
             })
-            .then(() => setComment(""));
+            .then(() => setComment(''));
         }}
       >
-        댓글전송
+        댓글등록
       </button>
     </div>
   );
