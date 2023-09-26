@@ -2,9 +2,8 @@ export const teamInfo = [
   {
     name: '김진솔',
     introPhrase:
-      '프론트엔드 개발자로서 창의적인 솔루션을 제공하는 김진솔입니다. 다양한 프로젝트에서 동적인 웹 애플리케이션을 개발하는 데 능숙하며, React와 Vue.js 같은 프레임워크를 주로 사용합니다.',
+      '프론트엔드 개발자로서 창의적인 솔루션을 제공하는 김진솔입니다.',
     historyData: [
-      '유튜브 크리에이터 쏠킴 SOLKIM 활동',
       '코드스테이츠 프론트엔드 부트캠프 44기 수료',
     ],
     blog: 'https://summerr.tistory.com/',
