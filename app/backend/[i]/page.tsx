@@ -6,12 +6,11 @@ import Pagination from '@/components/Pagination';
 
 export default async function Backend({ params }: { params: { i: string } }) {
   const db = (await connectDB).db('forum');
-  let result: Post[] = await db.collection<Post>('post').find().sort({ 'date': -1 }).toArray();
+  let result: Post[] = await db.collection<Post>('post').find({category:'BACKEND'}).sort({ 'date': -1 }).toArray();
   result = result.map((d) => {
     d._id = d._id.toString() as unknown as string;
     return d;
   });
-  const newResult = result.filter((d) => d.category === 'BACKEND');
 
   const pageSize = 10;
   const currentPage = Number(params.i);
@@ -21,7 +20,7 @@ export default async function Backend({ params }: { params: { i: string } }) {
     <Main>
       <Aside />
       <Container>
-        <ListItem result={newResult.slice(startIndex, startIndex + pageSize)} />
+        <ListItem result={result.slice(startIndex, startIndex + pageSize)} />
         <Pagination totalPosts={result.length} currentPage={currentPage} pageSize={pageSize} />
       </Container>
       <Aside banner={'banner'} />
