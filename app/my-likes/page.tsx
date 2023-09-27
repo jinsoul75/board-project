@@ -34,7 +34,7 @@ export default async function MyLikes() {
 
   return (
     <Main>
-      <Aside banner={null} />
+      <Aside />
       <ListItem result={newResult} />
       <Aside banner={'banner'} />
     </Main>

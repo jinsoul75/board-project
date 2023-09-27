@@ -7,7 +7,7 @@ import Pagination from '@/components/Pagination';
 export default async function List({ params }: { params: { i: string } }) {
   const db = (await connectDB).db('forum');
 
-  let result: Post[] = await db.collection<Post>('post').find().sort({ 'date': -1 }).toArray();
+  let result: Post[] = await db.collection<Post>('post').find().sort({ date: -1 }).toArray();
   result = result.map((d) => {
     d._id = d._id.toString() as unknown as string;
     return d;
@@ -19,7 +19,7 @@ export default async function List({ params }: { params: { i: string } }) {
 
   return (
     <Main>
-      <Aside banner={null} />
+      <Aside />
       <Container>
         <ListItem result={result.slice(startIndex, startIndex + pageSize)} />
         <Pagination totalPosts={result.length} currentPage={currentPage} pageSize={pageSize} />

@@ -19,7 +19,7 @@ export default async function Backend({ params }: { params: { i: string } }) {
 
   return (
     <Main>
-      <Aside banner={null} />
+      <Aside />
       <Container>
         <ListItem result={newResult.slice(startIndex, startIndex + pageSize)} />
         <Pagination totalPosts={result.length} currentPage={currentPage} pageSize={pageSize} />
