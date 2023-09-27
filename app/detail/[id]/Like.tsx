@@ -21,7 +21,7 @@ export default function Like(props: LikeProps) {
 
   return (
     <button
-      className="text-2xl hover:text-red-600 active:text-xl mr-1"
+      className="text-xl hover:text-red-600 active:text-xl mr-1 flex items-center"
       onClick={() => {
         setIsLike(!isLike);
         axios
@@ -32,6 +32,7 @@ export default function Like(props: LikeProps) {
       }}
     >
       {isLike ? <FaHeart className="text-red-600" /> : <FaRegHeart />}
+      <span>좋아요</span>
     </button>
   );
 }

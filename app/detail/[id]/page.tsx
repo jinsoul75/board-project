@@ -41,11 +41,12 @@ export default async function Detail(props: { params: { id: string } }) {
       foundOne.userId = foundOne.userId.toString();
     }
   }
+
   return (
     <Container>
       <Aside />
       <main className="flex flex-col p-[20px] grow">
-        <article className='mb-6'>
+        <article className="mb-6">
           {result?.category === 'FRONTEND' ? (
             <div className="font-bold text-orange-600 mb-0.5">{result?.category}</div>
           ) : (
@@ -59,16 +60,17 @@ export default async function Detail(props: { params: { id: string } }) {
           </div>
           <Buttons>
             <Like isLike={{ pageId: foundOne?.pageId }} pageId={result?._id} />
-            <div>좋아요</div>
             {session && session.user.email === result?.email ? (
               <>
-                <button className="text-2xl hover:text-blue-600  mr-1">
-                  <Link prefetch={false} href={`/edit/${result?._id}`} />
+                <Link
+                  className="text-xl hover:text-blue-600  mr-1 flex items-center"
+                  prefetch={false}
+                  href={`/edit/${result?._id}`}
+                >
                   <AiOutlineEdit />
-                </button>
-                <div>수정하기</div>
+                  수정하기
+                </Link>
                 <DeleteBtn />
-                <div>삭제하기</div>
               </>
             ) : null}
           </Buttons>
