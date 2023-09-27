@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import tw from 'tailwind-styled-components';
 
+import { AiFillHeart, AiOutlineMessage } from 'react-icons/ai';
+import { BsPersonCircle } from 'react-icons/bs';
 export interface Post {
   author: string;
   category: string;
@@ -19,7 +21,6 @@ interface PostListProps {
 }
 
 export default function ListItem({ result }: PostListProps) {
-
   return (
     <StyledUl>
       {result.map((post: Post, index: number) => (
@@ -30,22 +31,35 @@ export default function ListItem({ result }: PostListProps) {
             ) : (
               <div className="font-bold text-emerald-600 mb-0.5">{post.category}</div>
             )}
-            <Link prefetch={false} href={`/detail/${post._id}`}>
-              <div className="flex justify-between mb-3">
-                <div className="font-bold text-xl">{post.title}</div>
-                <div>{post.author}</div>
-                <div>
-                  <span className="mr-[10px]">댓글 수{post.commentCount}</span>
-                  <span>좋아요 수{post.likeCount}</span>
-                </div>
-              </div>
-              <p className="mb-3">{post.content.slice(0, 198)}</p>
-            </Link>
-            <div className="flex justify-end">
+            <FlexDiv className="mb-2 text-gray-500">
+              <FlexDiv className="mr-2">
+                <BsPersonCircle className="mr-1"/>
+                {post.author}
+              </FlexDiv>
               <div>{post.date}</div>
-            </div>
+            </FlexDiv>
+            <Link
+              className="hover:underline decoration-sky-500"
+              prefetch={false}
+              href={`/detail/${post._id}`}
+            >
+              <div className="flex justify-between mb-1">
+                <div className="font-bold text-xl">{post.title}</div>
+              </div>
+            </Link>
+            <p className="mb-3 text-gray-600">{post.content.length > 165 ? `${post.content.slice(0,166)}...`:post.content}</p>
+            <FlexDiv>
+              <FlexDiv className="mr-[10px]">
+                <AiFillHeart className="mr-2" />
+                {post.likeCount}
+              </FlexDiv>
+              <FlexDiv>
+                <AiOutlineMessage className="mr-2" />
+                {post.commentCount}
+              </FlexDiv>
+            </FlexDiv>
           </div>
-          { index === result.length - 1 ? null : <hr></hr>}
+          {index === result.length - 1 ? null : <hr></hr>}
         </StyledListItem>
       ))}
     </StyledUl>
@@ -58,4 +72,10 @@ px-[20px]
 `;
 const StyledListItem = tw.li`
 m-1
+`;
+
+const FlexDiv = tw.div`
+  flex
+  items-center
+  text-l
 `;

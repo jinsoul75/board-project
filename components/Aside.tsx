@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components';
 import Button from './Button';
 import Banner from './Banner';
 
-export default function Aside({ banner }: { banner: string | null }) {
+export default function Aside({ banner }: { banner?: string }) {
 
   return (
     <StyledAside>
@@ -12,7 +12,7 @@ export default function Aside({ banner }: { banner: string | null }) {
         <Banner />
       ) : (
         <>
-          <Button buttonName={<Link href="/list/1">📋 전체글</Link>}></Button>
+          <Button className="hover:bg-sky-700" buttonName={<Link href="/list/1">📋 전체글</Link>}></Button>
           <Button buttonName={<Link href="/frontend/1">🖥️ 프론트엔드</Link>}></Button>
           <Button buttonName={<Link href="/backend/1">⚙️ 백엔드</Link>}></Button>
           <Button buttonName={<Link href="/my-likes">👍🏻 좋아요</Link>}></Button>

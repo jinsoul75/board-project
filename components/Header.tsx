@@ -19,9 +19,7 @@ export default async function Header() {
         </StyledLink>
       </div>
       {session === null ? (
-        <div>
-          <LoginBtn />
-        </div>
+        <LoginBtn />
       ) : (
         <div className="flex items-center">
           <span className="font-bold">{session.user.name}</span>
@@ -39,11 +37,11 @@ const HeaderWrapper = tw.header`
  bg-soul-gray
  text-soul-black
  justify-between
- h-[70px]
+ h-[80px]
 `;
 const StyledLink = tw(Link)`
-p-2
-mr-5
-hover:border-b-4 border-soul-black 
+p-4
+
 hover:font-bold
+
 `;

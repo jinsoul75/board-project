@@ -39,6 +39,7 @@ export default function About() {
                   height={100}
                 />
                 <Profile info={info} />
+                { index === teamInfo.length - 1 ? null : <hr></hr>}
               </div>
             );
           })}

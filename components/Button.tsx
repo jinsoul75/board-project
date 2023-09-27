@@ -4,6 +4,7 @@ interface ButtonProps {
   buttonName: string | JSX.Element;
   colorName?: string;
   type?:string;
+  className?: string;
 }
 
 export default function Button({ buttonName }:ButtonProps) {

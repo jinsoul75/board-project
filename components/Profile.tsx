@@ -45,7 +45,6 @@ export default function Profile({ info }: { info: ProfileType }) {
 }
 
 const Section = tw.section`
-  border-b-2
   flex
   flex-col
   pb-4

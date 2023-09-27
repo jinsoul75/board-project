@@ -8,19 +8,18 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import Comment from './Comment';
 import Like from './Like';
-import { Post } from '@/components/ListItem';
-
+import { AiOutlineEdit } from 'react-icons/ai';
 export interface UserInfo {
   user: {
     name: string;
     email: string;
     image: string;
     id: string;
-  }
+  };
 }
 
 export default async function Detail(props: { params: { id: string } }) {
-  const session:UserInfo | null = await getServerSession(authOptions);
+  const session: UserInfo | null = await getServerSession(authOptions);
   const db = (await connectDB).db('forum');
 
   let result = await db.collection('post').findOne({ _id: new ObjectId(props.params.id) });
@@ -42,25 +41,40 @@ export default async function Detail(props: { params: { id: string } }) {
       foundOne.userId = foundOne.userId.toString();
     }
   }
-
   return (
     <Container>
-      <Aside banner={null} />
-      <div className="flex flex-col p-[20px]">
-        <h4>{result?.title}</h4>
-        <p>{result?.content}</p>
-        <p>{result?.category}</p>
+      <Aside />
+      <main className="flex flex-col p-[20px] grow">
+        <article className='mb-6'>
+          {result?.category === 'FRONTEND' ? (
+            <div className="font-bold text-orange-600 mb-0.5">{result?.category}</div>
+          ) : (
+            <div className="font-bold text-emerald-600 mb-0.5">{result?.category}</div>
+          )}
+          <h1 className="text-xl font-bold mt-2 mb-6">{result?.title}</h1>
+          <p className="text-gray-600 text-l mb-6">{result?.content}</p>
+          <div className="flex items-end flex-col">
+            <div>{result?.date}</div>
+            <div>{result?.author}</div>
+          </div>
+          <Buttons>
+            <Like isLike={{ pageId: foundOne?.pageId }} pageId={result?._id} />
+            <div>좋아요</div>
+            {session && session.user.email === result?.email ? (
+              <>
+                <button className="text-2xl hover:text-blue-600  mr-1">
+                  <Link prefetch={false} href={`/edit/${result?._id}`} />
+                  <AiOutlineEdit />
+                </button>
+                <div>수정하기</div>
+                <DeleteBtn />
+                <div>삭제하기</div>
+              </>
+            ) : null}
+          </Buttons>
+        </article>
         <Comment _id={result?._id as unknown as number} />
-        <Like isLike={{ pageId: foundOne?._id }} pageId={result?._id} />
-        {session && session.user.email === result?.email ? (
-          <>
-            <Link prefetch={false} href={`/edit/${result?._id}`}>
-              <button className="border border-soul-black rounded py-1 px-5">수정 버튼</button>
-            </Link>
-            <DeleteBtn />
-          </>
-        ) : null}
-      </div>
+      </main>
       <Aside banner={'banner'} />
     </Container>
   );
@@ -69,4 +83,9 @@ export default async function Detail(props: { params: { id: string } }) {
 const Container = tw.div`
   flex
   p-[20px]
+  justify-between
+`;
+
+const Buttons = tw.div`
+  flex
 `;
