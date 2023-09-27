@@ -1,12 +1,15 @@
 "use client";
+
+import Image from 'next/image';
 import { signIn } from "next-auth/react";
+import kakaoLoginBtn from '../public/images/kakao_login.png'
+
 export default function LoginBtn() {
   return (
     <button
-      className='border border-soul-black rounded py-1 px-5'
       onClick={() => signIn()}
     >
-      로그인
+      <Image src={kakaoLoginBtn} alt="login-button" />
     </button>
   );
 }
