@@ -3,7 +3,7 @@ import Link from 'next/link';
 import tw from 'tailwind-styled-components';
 
 import { AiFillHeart, AiOutlineMessage } from 'react-icons/ai';
-import { CgProfile } from 'react-icons/cg';
+import { BsPersonCircle } from 'react-icons/bs';
 export interface Post {
   author: string;
   category: string;
@@ -31,9 +31,9 @@ export default function ListItem({ result }: PostListProps) {
             ) : (
               <div className="font-bold text-emerald-600 mb-0.5">{post.category}</div>
             )}
-            <FlexDiv className="mb-2 text-gray-800">
+            <FlexDiv className="mb-2 text-gray-500">
               <FlexDiv className="mr-2">
-                <CgProfile className="mr-1"/>
+                <BsPersonCircle className="mr-1"/>
                 {post.author}
               </FlexDiv>
               <div>{post.date}</div>

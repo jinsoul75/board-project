@@ -1,15 +1,16 @@
 'use client';
 
 import axios from 'axios';
-import { useRouter,useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 export default function DetailLink() {
   const router = useRouter();
-  const params = useParams()
+  const params = useParams();
 
   return (
     <button
-      className="border border-soul-black rounded py-1 px-5"
+      className="text-2xl hover:text-violet-600"
       onClick={() => {
         axios
           .post('/api/post/delete', {
@@ -18,7 +19,7 @@ export default function DetailLink() {
           .then((res) => {
             if (res.status === 200) {
               router.push('/');
-              alert("성공적으로 삭제되었습니다.");
+              alert('성공적으로 삭제되었습니다.');
             }
           })
           .catch(() => {
@@ -26,7 +27,7 @@ export default function DetailLink() {
           });
       }}
     >
-      삭제버튼
+      <AiOutlineDelete />
     </button>
   );
 }

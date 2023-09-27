@@ -26,13 +26,11 @@ export default function Like(props: LikeProps) {
         setIsLike(!isLike);
         axios
           .post('/api/post/like', { pageId: props.pageId })
-          .then(() => {})
           .catch(() => {
             alert('로그인 후 이용이 가능합니다.');
           });
       }}
     >
-      {/* 사용자와 일치하는 좋아요데이터가 있고 그 좋아요데이터의 pageId가 지금 pageId와 같고 isLike 상태가 true라면 찬하트 */}
       {isLike ? <FaHeart className="text-red-600" /> : <FaRegHeart />}
     </button>
   );
