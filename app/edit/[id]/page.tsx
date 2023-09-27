@@ -9,9 +9,11 @@ export default async function Edit(props: { params: { id: number } }) {
 
   return (
     <main className="p-4">
-      <h1 className="text-3xl font-bold">수정페이지</h1>
       <section>
         <form action="/api/post/edit" method="POST" className="flex flex-col border p-4 mt-4">
+          <h1 className="text-3xl font-bold">수정페이지</h1>
+          <hr className="my-4"></hr>
+          <StyledLabel htmlFor="category">카테고리</StyledLabel>
           <select className="border rounded-2xl p-2 w-40" id="category" name="category">
             <option value="FRONTEND">프론트앤드</option>
             <option value="BACKEND">백앤드</option>
@@ -32,8 +34,8 @@ export default async function Edit(props: { params: { id: number } }) {
             defaultValue={result?.content}
           ></textarea>
           <input className="hidden" name="_id" defaultValue={result?._id.toString()}></input>
-          <div className='flex justify-center mt-4'>
-            <button className="border p-2 w-20 rounded-lg hover:bg-blue-300" type="submit">
+          <div className="flex justify-center mt-4">
+            <button className="border p-2 w-20 rounded-lg hover:bg-blue-500" type="submit">
               수정완료
             </button>
           </div>
@@ -43,7 +45,7 @@ export default async function Edit(props: { params: { id: number } }) {
   );
 }
 
-const StyledLabel = tw.label`
+export const StyledLabel = tw.label`
   text-lg
   font-bold
   mt-4
