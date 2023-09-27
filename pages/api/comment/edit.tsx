@@ -15,11 +15,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const db = (await connectDB).db('forum');
       let result = await db
         .collection('comment')
-        .updateOne(
-          { _id: new ObjectId(req.body._id) },
-          { $set: { content: req.body.comment, date: req.body.date } },
-        );
-      res.redirect(200, '/');
+        .updateOne({ _id: new ObjectId(req.body._id) }, { $set: { content: req.body.comment } });
+      res.redirect(302, '/');
     } catch (error) {
       console.error();
     }
