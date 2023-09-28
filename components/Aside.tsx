@@ -10,10 +10,10 @@ export default function Aside({ banner }: { banner?: string }) {
         <Banner />
       ) : (
         <>
-          <StyledLink href="/list/1">📋 전체글</StyledLink>
-          <StyledLink href="/frontend/1">🖥️ 프론트엔드</StyledLink>
-          <StyledLink href="/backend/1">⚙️ 백엔드</StyledLink>
-          <StyledLink href="/my-likes">👍🏻 좋아요</StyledLink>
+          <StyledLink href="/list?page=1">📋 전체글</StyledLink>
+          <StyledLink href="/frontend?page=1">🖥️ 프론트엔드</StyledLink>
+          <StyledLink href="/backend?page=1">⚙️ 백엔드</StyledLink>
+          <StyledLink href="/my-likes?page=1">👍🏻 좋아요</StyledLink>
           <StyledLink
             className="bg-indigo-500 hover:bg-indigo-300 active:bg-indigo-400 p-2	text-white rounded-xl"
             href="/write"

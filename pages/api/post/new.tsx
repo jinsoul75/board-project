@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const db = (await connectDB).db('forum');
       let result = await db.collection('post').insertOne(req.body);
-      res.redirect(302, '/list/1');
+      res.redirect(302, '/list?page=1');
     } catch (error) {
       console.error();
     }
