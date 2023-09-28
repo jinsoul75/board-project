@@ -10,24 +10,27 @@ export default function DetailLink() {
 
   return (
     <button
-      className="text-2xl hover:text-violet-600"
+      className="text-xl hover:text-violet-600 flex items-center"
       onClick={() => {
-        axios
-          .post('/api/post/delete', {
-            _id: params?.id,
-          })
-          .then((res) => {
-            if (res.status === 200) {
-              router.push('/');
-              alert('성공적으로 삭제되었습니다.');
-            }
-          })
-          .catch(() => {
-            alert('삭제할 권한이 없습니다.');
-          });
+        if (window.confirm('정말로 삭제하시겠습니까?')) {
+          axios
+            .post('/api/post/delete', {
+              _id: params?.id,
+            })
+            .then((res) => {
+              if (res.status === 200) {
+                router.push('/');
+                alert('성공적으로 삭제되었습니다.');
+              }
+            })
+            .catch(() => {
+              alert('삭제할 권한이 없습니다.');
+            });
+        }
       }}
     >
       <AiOutlineDelete />
+      <span>삭제하기</span>
     </button>
   );
 }
