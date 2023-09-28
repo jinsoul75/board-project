@@ -16,13 +16,14 @@ export default function Pagination({
 }: PaginationProps) {
   const totalPages = Math.ceil(totalPosts / pageSize);
 
+  const multipleFive = 5 * Math.ceil(currentPage / 5);
+
+  const standardPage = multipleFive - 4;
+
   const generatePageLinks = (currentPage: number) => {
     const links = [];
 
-    const standardPage = 5 * Math.ceil(currentPage / 5) - 4;
-
-    const lastPage =
-      totalPages >= 5 * Math.ceil(currentPage / 5) ? 5 * Math.ceil(currentPage / 5) : totalPages;
+    const lastPage = totalPages >= multipleFive ? multipleFive : totalPages;
 
     for (let i = standardPage; i <= lastPage; i++) {
       links.push(
@@ -47,7 +48,7 @@ export default function Pagination({
         <Link
           href={{
             pathname: `/${category}`,
-            query: { page: `${5 * Math.floor(currentPage / 5) - 4}` },
+            query: { page: `${standardPage}` },
           }}
         >
           <GrCaretPrevious />
@@ -59,7 +60,7 @@ export default function Pagination({
         <Link
           href={{
             pathname: `/${category}`,
-            query: { page: `${5 * Math.ceil(currentPage / 5) + 1}` },
+            query: { page: `${standardPage + 5}` },
           }}
         >
           <GrCaretNext />
