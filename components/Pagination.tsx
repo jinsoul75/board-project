@@ -16,17 +16,18 @@ export default function Pagination({
 }: PaginationProps) {
   const totalPages = Math.ceil(totalPosts / pageSize);
 
-  const prevPage = 5 * Math.floor(currentPage / 5) - 4;
-  const nextPage = prevPage + 5;
+  const FloorFive = 5 * Math.floor(currentPage / 5);
+  const ceilFive = 5 * Math.ceil(currentPage / 5);
 
-  const multipleFive = 5 * Math.ceil(currentPage / 5);
+  const prevPage = FloorFive - 4;
+  const nextPage = ceilFive + 1;
 
-  const startPage = multipleFive - 4;
+  const startPage = ceilFive - 4;
 
   const generatePageLinks = (currentPage: number) => {
     const links = [];
 
-    const lastPage = totalPages >= multipleFive ? startPage + 4 : totalPages;
+    const lastPage = totalPages >= ceilFive ? startPage + 4 : totalPages;
     for (let i = startPage; i <= lastPage; i++) {
       links.push(
         <Link
@@ -57,7 +58,7 @@ export default function Pagination({
         </Link>
       )}
       {generatePageLinks(currentPage)}
-      {totalPages < multipleFive ? null : (
+      {totalPages < ceilFive ? null : (
         <Link
           href={{
             pathname: `/${category}`,
