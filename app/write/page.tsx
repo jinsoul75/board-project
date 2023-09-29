@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
-import Button from '../../components/Button';
-import Aside from '../../components/Aside';
+import Button from '../../components/common/Button';
+import Aside from '../../components/common/Aside';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { redirect } from 'next/navigation';

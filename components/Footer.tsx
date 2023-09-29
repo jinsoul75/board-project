@@ -1,5 +1,5 @@
 import tw from "tailwind-styled-components";
-import DummyCreater from './DummyCreater';
+import DummyCreater from './post/DummyCreater';
 export default function Navbar() {
   return (
       <Continer>

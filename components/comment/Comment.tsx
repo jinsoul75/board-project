@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import tw from 'tailwind-styled-components';
-interface DataType {
+export interface DataType {
   content: string;
   author: string;
   date: string;
@@ -83,7 +83,7 @@ export function CommentList({ d }: { d: DataType }) {
           <input
             className="border-b-4"
             defaultValue={d.content}
-            onChange={(e) => setEditedValue(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditedValue(e.target.value)}
           />
         ) : (
           <div className="text-lg">{d.content}</div>

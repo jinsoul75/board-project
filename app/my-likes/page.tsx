@@ -1,6 +1,6 @@
 import { connectDB } from '@/util/database';
-import ListItem, { Post } from '../../components/ListItem';
-import Aside from '../../components/Aside';
+import ListItem, { Post } from '../../components/post/ListItem';
+import Aside from '../../components/common/Aside';
 import tw from 'tailwind-styled-components';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';

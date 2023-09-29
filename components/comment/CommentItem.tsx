@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import tw from 'tailwind-styled-components';
-import { DataType } from '@/app/list/detail/[id]/Comment';
+import { DataType } from '@/components/comment/Comment';
 
 export default function CommentItem({ d }: { d: DataType }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -23,9 +23,7 @@ export default function CommentItem({ d }: { d: DataType }) {
                 comment: editedValue,
                 _id: d._id,
               })
-              .then(() => {
-                
-              })
+              .then(() => {})
               .catch((error) => {
                 console.error(error);
               });
@@ -42,7 +40,7 @@ export default function CommentItem({ d }: { d: DataType }) {
           <input
             className="border-b-4"
             defaultValue={editedValue}
-            onChange={(e) => setEditedValue(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditedValue(e.target.value)}
           />
         ) : (
           <div className="text-lg">{d.content}</div>
