@@ -1,13 +1,13 @@
 import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
-import Aside from '../../../components/Aside';
-import DeleteBtn from './DeleteBtn';
+import Aside from '../../../components/common/Aside';
+import DeleteBtn from '../../../components/post/DeleteBtn';
 import Link from 'next/link';
 import tw from 'tailwind-styled-components';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import Comment from './Comment';
-import Like from './Like';
+import Comment from '../../../components/comment/Comment';
+import Like from '../../../components/post/LikeBtn';
 import { AiOutlineEdit } from 'react-icons/ai';
 export interface UserInfo {
   user: {

@@ -2,9 +2,9 @@ import { getServerSession } from 'next-auth';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/util/database';
-import Button from '@/components/Button';
-import ListItem, { Post } from '@/components/ListItem';
-import Pagination from '@/components/Pagination';
+import Button from '@/components/common/Button';
+import ListItem, { Post } from '@/components/post/ListItem';
+import Pagination from '@/components/common/Pagination';
 interface Sessiontype {
   user: {
     name: string;

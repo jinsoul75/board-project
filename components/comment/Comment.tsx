@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import tw from 'tailwind-styled-components';
-interface DataType {
+import CommentItem from './CommentItem';
+export interface DataType {
   content: string;
   author: string;
   date: string;
@@ -58,9 +58,9 @@ export default function Comment(props: { _id: number }) {
       </form>
       {data.length > 0 ? (
         data.map((d: DataType) => (
-          <div key={d._id}>
-            <CommentList d={d} />
-          </div>
+          <section key={d._id}>
+            <CommentItem d={d} />
+          </section>
         ))
       ) : (
         <div className="flex justify-center mt-5">
@@ -68,60 +68,6 @@ export default function Comment(props: { _id: number }) {
         </div>
       )}
     </div>
-  );
-}
-
-export function CommentList({ d }: { d: DataType }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState('');
-
-  const editMode = isEditing ? '수정 완료' : '수정';
-  return (
-    <form className="border my-4 p-4 flex justify-between">
-      <div>
-        {isEditing ? (
-          <input
-            className="border-b-4"
-            defaultValue={d.content}
-            onChange={(e) => setEditedValue(e.target.value)}
-          />
-        ) : (
-          <div className="text-lg">{d.content}</div>
-        )}
-        <div className="text-sm text-slate-700">{d.author}</div>
-        <div className="text-sm text-slate-700">{d.date}</div>
-      </div>
-      <div className="flex">
-        <Button
-          className="mr-4"
-          type={isEditing ? 'submit' : 'button'}
-          onClick={() => {
-            if (isEditing) {
-              axios.post('/api/comment/edit', {
-                comment: editedValue,
-                _id: d._id,
-              });
-              setIsEditing(false);
-            } else {
-              setIsEditing(true);
-            }
-          }}
-        >
-          <AiOutlineEdit />
-          {editMode}
-        </Button>
-        <Button
-          onClick={() => {
-            axios.post('/api/comment/delete', {
-              _id: d._id,
-            });
-          }}
-        >
-          <AiOutlineDelete />
-          삭제
-        </Button>
-      </div>
-    </form>
   );
 }
 

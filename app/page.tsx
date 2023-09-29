@@ -2,7 +2,7 @@ import tw from 'tailwind-styled-components';
 import Image from 'next/image';
 import mainIng from '../public/images/main.jpg';
 
-import Aside from '../components/Aside';
+import Aside from '../components/common/Aside';
 
 export default async function Home() {
   return (
