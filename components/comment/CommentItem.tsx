@@ -13,29 +13,8 @@ export default function CommentItem({ d }: { d: DataType }) {
   const editMode = isEditing ? '수정 완료' : '수정';
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (isEditing) {
-          if (d.content !== editedValue) {
-            axios
-              .post('/api/comment/edit', {
-                comment: editedValue,
-                _id: d._id,
-              })
-              .then(() => {})
-              .catch((error) => {
-                console.error(error);
-              });
-          }
-          setIsEditing(false);
-        } else {
-          setIsEditing(true);
-        }
-      }}
-      className="border my-4 p-4 flex justify-between"
-    >
-      <div>
+    <div className="border my-4 p-4 flex justify-between">
+      <div className='grow'>
         {isEditing ? (
           <input
             className="border-b-4"
@@ -49,7 +28,30 @@ export default function CommentItem({ d }: { d: DataType }) {
         <div className="text-sm text-slate-700">{d.date}</div>
       </div>
       <div className="flex">
-        <Button type="submit" className="mr-4">
+        <Button
+          type="button"
+          className="mr-4"
+          onClick={(e) => {
+            console.log("dddd")
+            e.preventDefault();
+            if (isEditing) {
+              if (d.content !== editedValue) {
+                axios
+                  .post('/api/comment/edit', {
+                    comment: editedValue,
+                    _id: d._id,
+                  })
+                  .then(() => {})
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              }
+              setIsEditing(false);
+            } else {
+              setIsEditing(true);
+            }
+          }}
+        >
           <AiOutlineEdit />
           {editMode}
         </Button>
@@ -67,7 +69,7 @@ export default function CommentItem({ d }: { d: DataType }) {
           삭제
         </Button>
       </div>
-    </form>
+    </div>
   );
 }
 
