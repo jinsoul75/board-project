@@ -28,6 +28,7 @@
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "eslint": "^8.49.0",
+    "eslint-config-next": "^13.5.3",
     "prettier": "^3.0.3",
     "tailwind-styled-components": "^2.2.0"
   }
