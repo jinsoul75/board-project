@@ -19,7 +19,7 @@ export default function Profile({ info }: { info: ProfileType }) {
       <div className="mt-2">{info.introPhrase}</div>
       <ul className="mt-2">
         {info.historyData.map((history) => {
-          return <li className='list-disc list-inside'>{history}</li>;
+          return <li key={Math.random()} className='list-disc list-inside'>{history}</li>;
         })}
       </ul>
       <div className="mt-2">

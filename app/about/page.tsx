@@ -30,7 +30,7 @@ export default function About() {
         <div>
           {teamInfo.map((info, index) => {
             return (
-              <div>
+              <div key={index}>
                 <Image
                   className="rounded-full my-2"
                   src={profileImg[index]}

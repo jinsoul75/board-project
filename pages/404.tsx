@@ -7,7 +7,7 @@ export default function Custom404() {
     <Div>
       <Image src={errorImg} alt="404Error" width={500} height={500} />
       <h1 className="text-4xl font-bold">Oops!</h1>
-      <p className="text-xl">The page you're looking for doesn't exist.</p>
+      <p className="text-xl">The page you&apos;re looking for doesn&apos;t exist.</p>
     </Div>
   );
 }

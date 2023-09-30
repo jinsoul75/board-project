@@ -1,4 +1,3 @@
-import tw from 'tailwind-styled-components';
 import Image from 'next/image';
 import mainIng from '../public/images/main.jpg';
 

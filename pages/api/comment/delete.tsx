@@ -17,7 +17,6 @@ export default async function Handler(req:NextApiRequest , res: NextApiResponse)
         let result = await db
           .collection("comment")
           .deleteOne({ _id: new ObjectId(req.body._id) });
-          console.log(result)
           res.status(200).json("Deleted Successfully")
         } catch (error) {
           res.status(500);

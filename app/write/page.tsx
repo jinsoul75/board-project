@@ -1,6 +1,3 @@
-import tw from 'tailwind-styled-components';
-import Button from '../../components/common/Button';
-import Aside from '../../components/common/Aside';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { redirect } from 'next/navigation';
@@ -53,16 +50,3 @@ export default async function write() {
     </main>
   );
 }
-const StyledInput = tw.input`
-border
-border-indigo-600
-rounded-lg
-`;
-
-const StyledTextarea = tw.textarea`
-border
-border-indigo-600
-rounded-lg
-w-60
-resize-none	
-`;
