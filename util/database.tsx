@@ -1,22 +1,15 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-var */
-/* eslint-disable no-unused-vars */
-import { MongoClient } from "mongodb";
+import { MongoClient } from 'mongodb';
 
 const url = process.env.DB_CONN_STRING as string;
-const options: any = { useNewUrlParser: true };
-let connectDB: Promise<MongoClient>;
-declare global {
-  namespace globalThis {
-    var _mongo: Promise<MongoClient>;
+
+let connectDB;
+
+if (process.env.NODE_ENV === 'development') {
+  if (!global._mongo) {
+    global._mongo = new MongoClient(url).connect();
   }
-}
-if (process.env.NODE_ENV === "development") {
-  if (!globalThis._mongo) {
-    globalThis._mongo = new MongoClient(url, options).connect();
-  }
-  connectDB = globalThis._mongo;
+  connectDB = global._mongo;
 } else {
-  connectDB = new MongoClient(url, options).connect();
+  connectDB = new MongoClient(url).connect();
 }
 export { connectDB };
