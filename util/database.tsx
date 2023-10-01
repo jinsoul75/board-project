@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const url = process.env.DB_CONN_STRING as string;
+const url = process.env.NEXT_PUBLIC_DB_CONN_STRING as string;
 
 let connectDB: Promise<MongoClient>;
 declare global {
