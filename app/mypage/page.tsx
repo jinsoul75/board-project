@@ -34,9 +34,11 @@ export default async function Mypage() {
         <div>
           <div className="flex flex-col justify-center items-center">
             <Image
-              className="w-[100px] h-[100px] rounded-full"
+              className="rounded-full"
               src={session.user.image}
               alt="user-image"
+              width={100}
+              height={100}
             ></Image>
             <div className="mt-4 text-3xl font-bold text-blue-600">{session.user.name}</div>
             <div className="mt-4">{session.user.email}</div>
