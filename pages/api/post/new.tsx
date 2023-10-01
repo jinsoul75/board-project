@@ -17,6 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     try {
       const db = (await connectDB).db('forum');
+      // eslint-disable-next-line no-unused-vars
       let result = await db.collection('post').insertOne(req.body);
       res.redirect(302, '/list?page=1');
     } catch (error) {

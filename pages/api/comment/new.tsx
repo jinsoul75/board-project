@@ -20,6 +20,7 @@ export default async function handler(
   };
   if (req.method === "POST") {
     try {
+      // eslint-disable-next-line no-unused-vars
       let result = await db.collection("comment").insertOne(commentInfo);
       res.status(200).json("저장완료");
     } catch (error) {
@@ -28,6 +29,7 @@ export default async function handler(
     const count = await db
       .collection("comment")
       .countDocuments({ parent: new ObjectId(req.body._id) });
+    // eslint-disable-next-line no-unused-vars
     const foundOnePost = await db
       .collection("post")
       .updateOne(

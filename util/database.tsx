@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-var */
+/* eslint-disable no-unused-vars */
 import { MongoClient } from "mongodb";
 
 const url = process.env.DB_CONN_STRING as string;

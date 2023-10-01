@@ -10,6 +10,7 @@ export default async function Handler(req:NextApiRequest, res:NextApiResponse) {
     }
     try {
       let db = (await connectDB).db("test");
+      // eslint-disable-next-line no-unused-vars
       let result = await db
         .collection("users")
         .updateOne(

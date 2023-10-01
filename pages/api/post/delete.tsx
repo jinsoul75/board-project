@@ -12,6 +12,7 @@ export default async function Handler(req:NextApiRequest , res: NextApiResponse)
     if(foundOne?.email === session?.user?.email){
       try {
         let db = (await connectDB).db("forum");
+        // eslint-disable-next-line no-unused-vars
         let result = await db
           .collection("post")
           .deleteOne({ _id: new ObjectId(req.body._id) });
