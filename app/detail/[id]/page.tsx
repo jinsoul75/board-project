@@ -59,9 +59,9 @@ export default async function Detail(props: { params: { id: string } }) {
             <div>{result?.author}</div>
           </div>
           <Buttons>
-            <Like isLike={{ pageId: foundOne?.pageId }} pageId={result?._id} />
             {session && session.user.email === result?.email ? (
               <>
+                <Like isLike={{ pageId: foundOne?.pageId }} pageId={result?._id} />
                 <Link
                   className="text-xl hover:text-blue-600  mr-1 flex items-center"
                   prefetch={false}
@@ -75,7 +75,7 @@ export default async function Detail(props: { params: { id: string } }) {
             ) : null}
           </Buttons>
         </article>
-        <Comment _id={result?._id as unknown as number} />
+        <Comment _id={result?._id as unknown as number} session={session} />
       </main>
       <Aside banner={'banner'} />
     </Container>

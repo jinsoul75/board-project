@@ -5,16 +5,19 @@ import axios from 'axios';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import tw from 'tailwind-styled-components';
 import { DataType } from '@/components/comment/Comment';
+import { UserInfo } from '@/app/detail/[id]/page';
 
-export default function CommentItem({ d }: { d: DataType }) {
+export default function CommentItem(props: { d: DataType; session: null | UserInfo }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState(d.content);
+  const [editedValue, setEditedValue] = useState(props.d.content);
 
   const editMode = isEditing ? '수정 완료' : '수정';
+  const onlyDate = props.d.date.split("T")[0]
+  const onlyTime = props.d.date.split("T")[1].slice(0,5)
 
   return (
     <div className="border my-4 p-4 flex justify-between">
-      <div className='grow'>
+      <div className="grow">
         {isEditing ? (
           <input
             className="border-b-4"
@@ -22,11 +25,13 @@ export default function CommentItem({ d }: { d: DataType }) {
             onChange={(e: ChangeEvent<HTMLInputElement>) => setEditedValue(e.target.value)}
           />
         ) : (
-          <div className="text-lg">{d.content}</div>
+          <div className="text-lg">{props.d.content}</div>
         )}
-        <div className="text-sm text-slate-700">{d.author}</div>
-        <div className="text-sm text-slate-700">{d.date}</div>
+        <div className="text-sm text-slate-700">{props.d.author}</div>
+        <div className="text-sm text-slate-700">{onlyDate}</div>
+        <div className="text-sm text-slate-700">{onlyTime}</div>
       </div>
+      {props.session && props.d.email === props.d.email ?
       <div className="flex">
         <Button
           type="button"
@@ -34,11 +39,11 @@ export default function CommentItem({ d }: { d: DataType }) {
           onClick={(e) => {
             e.preventDefault();
             if (isEditing) {
-              if (d.content !== editedValue) {
+              if (props.d.content !== editedValue) {
                 axios
                   .post('/api/comment/edit', {
                     comment: editedValue,
-                    _id: d._id,
+                    _id: props.d._id,
                   })
                   .then(() => {})
                   .catch((error) => {
@@ -59,7 +64,7 @@ export default function CommentItem({ d }: { d: DataType }) {
           onClick={() => {
             if (window.confirm('정말로 삭제하시겠습니까?')) {
               axios.post('/api/comment/delete', {
-                _id: d._id,
+                _id: props.d._id,
               });
             }
           }}
@@ -68,6 +73,7 @@ export default function CommentItem({ d }: { d: DataType }) {
           삭제
         </Button>
       </div>
+      : null}
     </div>
   );
 }

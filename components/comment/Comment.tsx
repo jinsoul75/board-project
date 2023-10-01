@@ -3,14 +3,16 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import CommentItem from './CommentItem';
+import { UserInfo } from '@/app/detail/[id]/page';
 export interface DataType {
   content: string;
   author: string;
   date: string;
   _id: string;
+  email: string;
 }
 
-export default function Comment(props: { _id: number }) {
+export default function Comment(props: { _id: number; session: null | UserInfo }) {
   const [comment, setComment] = useState('');
   const [data, setData] = useState([]);
 
@@ -45,20 +47,25 @@ export default function Comment(props: { _id: number }) {
       >
         <input
           className=" mr-2 border-b-4 grow"
-          placeholder="댓글을 입력해주세요"
+          placeholder={props.session ? '댓글을 입력해주세요' : '로그인이 필요한 서비스입니다.'}
           onChange={(e) => {
             setComment(e.target.value);
           }}
           value={comment}
+          disabled={props.session ? false : true}
         />
-        <button className="border w-40 hover:bg-slate-200	" type="submit">
+        <button
+          className="border w-40 hover:bg-slate-200	"
+          type="submit"
+          disabled={props.session ? false : true}
+        >
           댓글등록
         </button>
       </form>
       {data.length > 0 ? (
         data.map((d: DataType) => (
           <section key={d._id}>
-            <CommentItem d={d} />
+            <CommentItem session={props.session} d={d} />
           </section>
         ))
       ) : (

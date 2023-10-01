@@ -37,4 +37,5 @@ w-40
 text-xl
 text-center
 mb-4
+hover:bg-slate-200	rounded-xl
 `;

@@ -32,7 +32,7 @@ export default function Like(props: LikeProps) {
       }}
     >
       {isLike ? <FaHeart className="text-red-600" /> : <FaRegHeart />}
-      <span>좋아요</span>
+      <span className='ml-1'>좋아요</span>
     </button>
   );
 }
