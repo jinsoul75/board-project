@@ -10,5 +10,5 @@ export default async function handler(
   const db = (await connectDB).db("forum");
   // eslint-disable-next-line no-unused-vars
   let result = await db.collection("comment").find({parent: new ObjectId(id)}).sort({ date: -1 }).toArray();
-  res.status(200)
+  res.status(200).json(result)
 }

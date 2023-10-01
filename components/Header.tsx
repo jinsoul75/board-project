@@ -26,7 +26,7 @@ export default async function Header() {
           <span className="font-bold">{session.user.name}</span>
           <span className="mr-[10px]">님 환영합니다!</span>
           <Image
-            className="w-[30px] h-[30px] rounded-full mr-[10px]"
+            className="rounded-full mr-[10px]"
             src={session.user.image}
             alt={'user-image'}
             width={30}
