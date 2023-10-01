@@ -79,9 +79,9 @@ export default function CommentItem(props: { d: DataType; session: null | UserIn
 }
 
 const Button = tw.button`
-    border
-    flex
-    items-center
-    p-1
-    hover:bg-slate-200
+  border
+  flex
+  items-center
+  p-1
+  hover:bg-slate-200
   `;
