@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 
 const url = process.env.DB_CONN_STRING as string;
 
-let connectDB;
+let connectDB:Promise<MongoClient>;
 
 if (process.env.NODE_ENV === 'development') {
   if (!global._mongo) {
