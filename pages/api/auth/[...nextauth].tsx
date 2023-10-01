@@ -4,8 +4,8 @@ import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import NextAuth from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-const clientId: string = process.env.KAKAO_CLIENT_ID || '';
-const clientSecret: string = process.env.KAKAO_CLIENT_SECRET || '';
+const clientId: string = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID || '';
+const clientSecret: string = process.env.NEXT_PUBLIC_KAKAO_CLIENT_SECRET || '';
 
 export const authOptions:any = {
   providers: [
@@ -31,7 +31,7 @@ export const authOptions:any = {
   session: {
     strategy: 'jwt',
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(connectDB),
 };
 export default NextAuth(authOptions);

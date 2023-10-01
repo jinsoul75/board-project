@@ -17,7 +17,7 @@ export default function Like(props: LikeProps) {
 
   useEffect(() => {
     if (props.isLike.pageId === props.pageId) setIsLike(true);
-  }, []);
+  }, [props.isLike.pageId, props.pageId]);
 
   return (
     <button

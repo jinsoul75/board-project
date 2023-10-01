@@ -20,15 +20,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     try {
       if (foundOneLike) {
+        // eslint-disable-next-line no-unused-vars
         let result = await db.collection('like').deleteOne(foundOneLike);
         res.status(200).json('삭제완료');
       } else {
+        // eslint-disable-next-line no-unused-vars
         let result = await db.collection('like').insertOne(likeInfo);
         res.status(200).json('저장완료');
       }
       const count = await db
         .collection('like')
         .countDocuments({ pageId: new ObjectId(req.body.pageId) });
+      // eslint-disable-next-line no-unused-vars
       const foundOnePost = await db
         .collection('post')
         .updateOne({ _id: new ObjectId(req.body.pageId) }, { $set: { likeCount: count } });

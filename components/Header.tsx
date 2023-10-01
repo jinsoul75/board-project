@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import tw from 'tailwind-styled-components';
+import Image from 'next/image';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import LoginBtn from '../app/LoginBtn';
@@ -24,7 +25,13 @@ export default async function Header() {
         <div className="flex items-center">
           <span className="font-bold">{session.user.name}</span>
           <span className="mr-[10px]">님 환영합니다!</span>
-          <img className="w-[30px] h-[30px] rounded-full mr-[10px]" src={session.user.image}></img>
+          <Image
+            className="rounded-full mr-[10px]"
+            src={session.user.image}
+            alt={'user-image'}
+            width={30}
+            height={30}
+          ></Image>
           <LogoutBtn />
         </div>
       )}

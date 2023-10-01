@@ -15,7 +15,7 @@
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
-    "mongodb": "^5.5.0",
+    "mongodb": "^5.9.0",
     "next": "13.4.4",
     "next-auth": "^4.22.1",
     "postcss": "8.4.23",
@@ -27,7 +27,10 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "eslint": "^8.49.0",
+    "eslint": "^8.50.0",
+    "eslint-config-next": "^13.5.3",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.3",
     "tailwind-styled-components": "^2.2.0"
   }

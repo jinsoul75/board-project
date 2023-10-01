@@ -1,10 +1,9 @@
 import { getServerSession } from 'next-auth';
-
+import Image from 'next/image';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/util/database';
 import Button from '@/components/common/Button';
 import ListItem, { Post } from '@/components/post/ListItem';
-import Pagination from '@/components/common/Pagination';
 interface Sessiontype {
   user: {
     name: string;
@@ -17,12 +16,12 @@ interface Sessiontype {
 export default async function Mypage() {
   const session: Sessiontype | null = await getServerSession(authOptions);
   const db = (await connectDB).db('forum');
-  let result:Post[] = await db.collection<Post>('post').find().sort({date:-1}).toArray();
+  let result: Post[] = await db.collection<Post>('post').find().sort({ date: -1 }).toArray();
   result = result.map((d) => {
     d._id = d._id.toString() as unknown as string;
     return d;
   });
-  let myResult:Post[] = [];
+  let myResult: Post[] = [];
   if (session) {
     myResult = result.filter((d) => d.email === session.user?.email);
   }
@@ -34,9 +33,15 @@ export default async function Mypage() {
       ) : (
         <div>
           <div className="flex flex-col justify-center items-center">
-            <img className="w-[100px] h-[100px] rounded-full" src={session.user.image}></img>
+            <Image
+              className="rounded-full"
+              src={session.user.image}
+              alt="user-image"
+              width={100}
+              height={100}
+            ></Image>
             <div className="mt-4 text-3xl font-bold text-blue-600">{session.user.name}</div>
-            <div className="mt-4">{session.user.email}</div> 
+            <div className="mt-4">{session.user.email}</div>
           </div>
           {session.user.email === null ? (
             <form action="/api/post/add_email" method="POST">

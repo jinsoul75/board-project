@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import tw from 'tailwind-styled-components';
@@ -19,7 +19,7 @@ export default function CommentItem({ d }: { d: DataType }) {
           <input
             className="border-b-4"
             defaultValue={editedValue}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEditedValue(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setEditedValue(e.target.value)}
           />
         ) : (
           <div className="text-lg">{d.content}</div>
@@ -32,7 +32,6 @@ export default function CommentItem({ d }: { d: DataType }) {
           type="button"
           className="mr-4"
           onClick={(e) => {
-            console.log("dddd")
             e.preventDefault();
             if (isEditing) {
               if (d.content !== editedValue) {

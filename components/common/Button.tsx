@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components";
 
 interface ButtonProps {
-  buttonName: string | JSX.Element;
+  buttonName: string;
   colorName?: string;
   type?:string;
   className?: string;

@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import tw from 'tailwind-styled-components';
 import CommentItem from './CommentItem';
 export interface DataType {
   content: string;
@@ -19,11 +18,11 @@ export default function Comment(props: { _id: number }) {
     axios(`/api/comment/list?id=${props._id}`).then((res) => {
       setData(res.data);
     });
-  }, []);
+  }, [props._id]);
 
   useEffect(() => {
     fetchComments();
-  }, []);
+  }, [fetchComments]);
 
   return (
     <div>
@@ -70,11 +69,3 @@ export default function Comment(props: { _id: number }) {
     </div>
   );
 }
-
-const Button = tw.button`
-  border
-  flex
-  items-center
-  p-1
-  hover:bg-slate-200
-`;

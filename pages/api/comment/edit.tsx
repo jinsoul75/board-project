@@ -1,18 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next/types';
 import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const session: any = await getServerSession(req, res, authOptions);
-
   if (req.method === 'POST') {
     if (req.body.comment === '') {
       return res.status(500).json('fill the title and content');
     }
     try {
       const db = (await connectDB).db('forum');
+      // eslint-disable-next-line no-unused-vars
       let result = await db
         .collection('comment')
         .updateOne({ _id: new ObjectId(req.body._id) }, { $set: { content: req.body.comment } });
