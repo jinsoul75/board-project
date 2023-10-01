@@ -1,4 +1,5 @@
 import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 import Image from 'next/image';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/util/database';
@@ -15,6 +16,11 @@ interface Sessiontype {
 
 export default async function Mypage() {
   const session: Sessiontype | null = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect('/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F');
+  }
+
   const db = (await connectDB).db('forum');
   let result: Post[] = await db.collection<Post>('post').find().sort({ date: -1 }).toArray();
   result = result.map((d) => {

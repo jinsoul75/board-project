@@ -7,7 +7,6 @@ export default async function write() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    alert('로그인이 필요한 서비스입니다!');
     redirect('/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F');
   }
 

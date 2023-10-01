@@ -5,10 +5,15 @@ import tw from 'tailwind-styled-components';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { ObjectId } from 'mongodb';
+import { redirect } from 'next/navigation';
 
 export default async function MyLikes() {
   const session: { user: { id: string } } | null = await getServerSession(authOptions);
 
+  if (!session) {
+    redirect('/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F');
+  }
+  
   //좋아요 데이터
   const db = (await connectDB).db('forum');
   let likes = await db
