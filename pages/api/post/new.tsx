@@ -2,7 +2,7 @@ import { connectDB } from '@/util/database';
 import { getServerSession, Session } from 'next-auth';
 import { NextApiRequest, NextApiResponse } from 'next/types';
 import { authOptions } from '../auth/[...nextauth]';
-import timeFommatter from '@/util/dateFomatter';
+import dateFommatter from '@/util/dateFomatter';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   let session: Session | null = await getServerSession(req, res, authOptions);
@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     req.body.author = session?.user?.name;
   }
 
-  const newData = { ...req.body, date: timeFommatter() };
+  const newData = { ...req.body, date: dateFommatter() };
 
   if (req.method === 'POST') {
     if (req.body.title === '' || req.body.content === '') {
