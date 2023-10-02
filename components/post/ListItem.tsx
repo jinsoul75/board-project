@@ -4,6 +4,7 @@ import tw from 'tailwind-styled-components';
 
 import { AiFillHeart, AiOutlineMessage } from 'react-icons/ai';
 import { BsPersonCircle } from 'react-icons/bs';
+import dateFommatter from '@/util/dateFomatter';
 export interface Post {
   author: string;
   category: string;
@@ -33,10 +34,10 @@ export default function ListItem({ result }: PostListProps) {
             )}
             <FlexDiv className="mb-2 text-gray-500">
               <FlexDiv className="mr-2">
-                <BsPersonCircle className="mr-1"/>
+                <BsPersonCircle className="mr-1" />
                 {post.author}
               </FlexDiv>
-              <div>{post.date}</div>
+              <div>{dateFommatter(post.date)}</div>
             </FlexDiv>
             <Link
               className="hover:underline decoration-red-500 underline-offset-4"
@@ -47,7 +48,9 @@ export default function ListItem({ result }: PostListProps) {
                 <div className="font-bold text-xl">{post.title}</div>
               </div>
             </Link>
-            <p className="mb-3 text-gray-600">{post.content.length > 165 ? `${post.content.slice(0,166)}...`:post.content}</p>
+            <p className="mb-3 text-gray-600">
+              {post.content.length > 165 ? `${post.content.slice(0, 166)}...` : post.content}
+            </p>
             <FlexDiv>
               <FlexDiv className="mr-[10px]">
                 <AiFillHeart className="mr-2" />

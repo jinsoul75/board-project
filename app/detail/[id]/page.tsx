@@ -9,6 +9,7 @@ import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import Comment from '../../../components/comment/Comment';
 import Like from '../../../components/post/LikeBtn';
 import { AiOutlineEdit } from 'react-icons/ai';
+import dateFommatter from '@/util/dateFomatter';
 export interface UserInfo {
   user: {
     name: string;
@@ -55,7 +56,7 @@ export default async function Detail(props: { params: { id: string } }) {
           <h1 className="text-xl font-bold mt-2 mb-6">{result?.title}</h1>
           <p className="text-gray-600 text-l mb-6">{result?.content}</p>
           <div className="flex items-end flex-col">
-            <div>{result?.date}</div>
+            <div>{dateFommatter(result?.date)}</div>
             <div>{result?.author}</div>
           </div>
           <Buttons>
