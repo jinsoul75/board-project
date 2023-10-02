@@ -3,8 +3,7 @@ import tw from 'tailwind-styled-components';
 import Image from 'next/image';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import LoginBtn from '../app/LoginBtn';
-import LogoutBtn from '../app/LogoutBtn';
+import { SignInBtn, SignOutBtn } from './SignInOutBtn';
 
 export default async function Header() {
   const session: { user: { image: string; name: string } } | null =
@@ -20,7 +19,7 @@ export default async function Header() {
         </StyledLink>
       </div>
       {session === null ? (
-        <LoginBtn />
+        <SignInBtn />
       ) : (
         <div className="flex items-center">
           <span className="font-bold">{session.user.name}</span>
@@ -32,7 +31,7 @@ export default async function Header() {
             width={30}
             height={30}
           ></Image>
-          <LogoutBtn />
+          <SignOutBtn />
         </div>
       )}
     </HeaderWrapper>

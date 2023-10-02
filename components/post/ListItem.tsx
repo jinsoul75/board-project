@@ -23,7 +23,7 @@ interface PostListProps {
 export default function ListItem({ result }: PostListProps) {
   return (
     <StyledUl>
-      {result.map((post: Post, index: number) => (
+      {result.map((post: Post) => (
         <StyledListItem key={post._id}>
           <div className="p-[20px]">
             {post.category === 'FRONTEND' ? (
@@ -39,7 +39,7 @@ export default function ListItem({ result }: PostListProps) {
               <div>{post.date}</div>
             </FlexDiv>
             <Link
-              className="hover:underline decoration-sky-500"
+              className="hover:underline decoration-red-500 underline-offset-4"
               prefetch={false}
               href={`/detail/${post._id}`}
             >
@@ -59,7 +59,6 @@ export default function ListItem({ result }: PostListProps) {
               </FlexDiv>
             </FlexDiv>
           </div>
-          {index === result.length - 1 ? null : <hr></hr>}
         </StyledListItem>
       ))}
     </StyledUl>
@@ -69,9 +68,11 @@ export default function ListItem({ result }: PostListProps) {
 const StyledUl = tw.ul`
 grow
 px-[20px]
+w-full
 `;
 const StyledListItem = tw.li`
 m-1
+border
 `;
 
 const FlexDiv = tw.div`

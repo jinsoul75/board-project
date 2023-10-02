@@ -13,7 +13,7 @@ export default async function MyLikes() {
   if (!session) {
     redirect('/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F');
   }
-  
+
   //좋아요 데이터
   const db = (await connectDB).db('forum');
   let likes = await db
@@ -40,7 +40,14 @@ export default async function MyLikes() {
   return (
     <Main>
       <Aside />
-      <ListItem result={newResult} />
+      <Container>
+        {newResult.length === 0 ? (
+          <div>좋아요한 게시글이 없어요!🥹</div>
+        ) : (
+          <ListItem result={newResult} />
+        )}
+      </Container>
+
       <Aside banner={'banner'} />
     </Main>
   );
@@ -50,4 +57,12 @@ const Main = tw.main`
   flex
   p-[20px]
   overflow-auto
+`;
+
+const Container = tw.div`
+  grow
+  flex
+  flex-col
+  justify-center
+  items-center
 `;
