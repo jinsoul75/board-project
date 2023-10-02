@@ -15,8 +15,8 @@ export default async function Edit(props: { params: { id: number } }) {
           <hr className="my-4"></hr>
           <StyledLabel htmlFor="category">카테고리</StyledLabel>
           <select className="border rounded-2xl p-2 w-40" id="category" name="category">
-            <option value="FRONTEND">프론트앤드</option>
-            <option value="BACKEND">백앤드</option>
+            <option value="FRONTEND">프론트엔드</option>
+            <option value="BACKEND">백엔드</option>
           </select>
           <StyledLabel htmlFor="title">제목</StyledLabel>
           <input
