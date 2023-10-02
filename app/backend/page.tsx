@@ -38,7 +38,7 @@ export default async function Frontend({
           currentPage={currentPage}
           pageSize={pageSize}
           category="backend"
-        />{' '}
+        />
       </Container>
       <Aside banner={'banner'} />
     </Main>
@@ -54,4 +54,5 @@ const Main = tw.main`
 const Container = tw.div`
   flex
   flex-col
+  grow
 `;
