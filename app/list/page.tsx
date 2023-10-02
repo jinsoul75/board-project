@@ -1,8 +1,10 @@
+import Image from 'next/image';
 import { connectDB } from '@/util/database';
 import ListItem, { Post } from '../../components/post/ListItem';
 import Aside from '../../components/common/Aside';
 import tw from 'tailwind-styled-components';
 import Pagination from '@/components/common/Pagination';
+import nodata from '../../public/images/nodata.jpg';
 
 export default async function List({
   searchParams,
@@ -13,7 +15,7 @@ export default async function List({
 
   const pageSize = 10;
   const currentPage = Number(searchParams.page);
-  const collection = db.collection('post')
+  const collection = db.collection('post');
   const totalPosts = await collection.countDocuments();
 
   let result: Post[] = await db
@@ -33,7 +35,11 @@ export default async function List({
     <Main>
       <Aside />
       <Container>
-        <ListItem result={result} />
+        {result.length === 0 ? (
+          <Image src={nodata} alt="no-data"></Image>
+        ) : (
+          <ListItem result={result} />
+        )}
         <Pagination
           totalPosts={totalPosts}
           currentPage={currentPage}
@@ -55,4 +61,5 @@ const Main = tw.main`
 const Container = tw.div`
   flex
   flex-col
+  grow
 `;

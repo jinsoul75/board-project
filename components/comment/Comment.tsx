@@ -37,7 +37,6 @@ export default function Comment(props: { _id: number; session: null | UserInfo }
             .post('/api/comment/new', {
               comment: comment,
               _id: props._id,
-              date: new Date(),
             })
             .then(() => {
               setComment('');

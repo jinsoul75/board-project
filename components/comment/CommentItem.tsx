@@ -16,8 +16,6 @@ export default function CommentItem(props: {
   const [editedValue, setEditedValue] = useState(props.d.content);
 
   const editMode = isEditing ? '수정 완료' : '수정';
-  const onlyDate = props.d.date.split('T')[0];
-  const onlyTime = props.d.date.split('T')[1].slice(0, 5);
 
   return (
     <div className="border my-4 p-4 flex justify-between">
@@ -32,8 +30,7 @@ export default function CommentItem(props: {
           <div className="text-lg">{props.d.content}</div>
         )}
         <div className="text-sm text-slate-700">{props.d.author}</div>
-        <div className="text-sm text-slate-700">{onlyDate}</div>
-        <div className="text-sm text-slate-700">{onlyTime}</div>
+        <div className="text-sm text-slate-700">{props.d.date}</div>
       </div>
       {props.session && props.d.email === props.d.email ? (
         <div className="flex">

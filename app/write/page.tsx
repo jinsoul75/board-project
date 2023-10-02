@@ -18,8 +18,8 @@ export default async function write() {
           <hr className='my-4'></hr>
           <StyledLabel htmlFor="category">카테고리</StyledLabel>
           <select className="border rounded-2xl p-2 w-40" id="category" name="category">
-            <option value="FRONTEND">프론트앤드</option>
-            <option value="BACKEND">백앤드</option>
+            <option value="FRONTEND">프론트엔드</option>
+            <option value="BACKEND">백엔드</option>
           </select>
           <StyledLabel htmlFor="title">제목</StyledLabel>
           <input
@@ -35,8 +35,7 @@ export default async function write() {
             id="content"
             name="content"
             placeholder="내용을 입력해주세요"
-          ></textarea>{' '}
-          <input className="hidden" name="date" defaultValue={new Date().toLocaleString()}></input>
+          ></textarea>
           <input className="hidden" name="likeCount" defaultValue={0}></input>
           <input className="hidden" name="commentCount" defaultValue={0}></input>
           <div className="flex justify-center mt-4">
