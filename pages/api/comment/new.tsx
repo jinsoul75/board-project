@@ -3,7 +3,6 @@ import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import timeFommatter from '@/util/dateFomatter';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,12 +11,16 @@ export default async function handler(
   const db = (await connectDB).db("forum");
   const session: any = await getServerSession(req, res, authOptions);
 
+  const date = new Date();
+  const offset = date.getTimezoneOffset() * 60000;
+  const dateOffset = new Date(date.getTime() - offset).toISOString();
+
   let commentInfo = {
     content: req.body.comment,
     author: session.user.name,
     email: session.user.email,
     parent: new ObjectId(req.body._id),
-    date: timeFommatter(),
+    date: dateOffset,
   };
   if (req.method === "POST") {
     try {

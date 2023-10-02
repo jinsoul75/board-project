@@ -6,6 +6,7 @@ import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import tw from 'tailwind-styled-components';
 import { DataType } from '@/components/comment/Comment';
 import { UserInfo } from '@/app/detail/[id]/page';
+import dateFommatter from '@/util/dateFomatter';
 
 export default function CommentItem(props: {
   d: DataType;
@@ -30,7 +31,7 @@ export default function CommentItem(props: {
           <div className="text-lg">{props.d.content}</div>
         )}
         <div className="text-sm text-slate-700">{props.d.author}</div>
-        <div className="text-sm text-slate-700">{props.d.date}</div>
+        <div className="text-sm text-slate-700">{dateFommatter(props.d.date)}</div>
       </div>
       {props.session && props.d.email === props.d.email ? (
         <div className="flex">
