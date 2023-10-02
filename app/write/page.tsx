@@ -35,8 +35,7 @@ export default async function write() {
             id="content"
             name="content"
             placeholder="내용을 입력해주세요"
-          ></textarea>{' '}
-          <input className="hidden" name="date" defaultValue={new Date().toLocaleString()}></input>
+          ></textarea>
           <input className="hidden" name="likeCount" defaultValue={0}></input>
           <input className="hidden" name="commentCount" defaultValue={0}></input>
           <div className="flex justify-center mt-4">
