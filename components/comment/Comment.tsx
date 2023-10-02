@@ -65,7 +65,7 @@ export default function Comment(props: { _id: number; session: null | UserInfo }
       {data.length > 0 ? (
         data.map((d: DataType) => (
           <section key={d._id}>
-            <CommentItem session={props.session} d={d} />
+            <CommentItem session={props.session} d={d} fetchComments={fetchComments} />
           </section>
         ))
       ) : (
