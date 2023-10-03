@@ -33,7 +33,7 @@ export default async function Mypage() {
   }
 
   return (
-    <div className="p-[20px]">
+    <div className="p-[20px] mb-[40px]">
       {session === null ? (
         <div>로그인이 필요한 서비스입니다.</div>
       ) : (
@@ -57,7 +57,8 @@ export default async function Mypage() {
               <Button colorName={'bg-emerald-600'} buttonName={'이메일입력'} type="submit"></Button>
             </form>
           ) : (
-            <div>
+            <div className="flex flex-col items-center border mt-5">
+              <div className="text-2xl font-bold m-5">내가 쓴 글</div>
               <ListItem result={myResult} />
             </div>
           )}
