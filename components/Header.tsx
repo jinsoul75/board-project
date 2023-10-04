@@ -12,8 +12,8 @@ export default async function Header() {
   return (
     <HeaderWrapper>
       <div className="flex items-center">
-        <StyledLink href="/">Home</StyledLink>
-        <StyledLink href="/about">About</StyledLink>
+        <StyledLink prefetch={false} href="/">Home</StyledLink>
+        <StyledLink prefetch={false} href="/about">About</StyledLink>
         <StyledLink prefetch={false} href="/mypage">
           Mypage
         </StyledLink>
