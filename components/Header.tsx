@@ -13,7 +13,7 @@ export default async function Header() {
     <HeaderWrapper>
       <div className="flex items-center">
         <StyledLink prefetch={false} href="/">Home</StyledLink>
-        <StyledLink prefetch={false} href="/list">Community</StyledLink>
+        <StyledLink prefetch={false} href="/list?page=1">Community</StyledLink>
         <StyledLink prefetch={false} href="/about">About</StyledLink>
         <StyledLink prefetch={false} href="/mypage">
           Mypage
