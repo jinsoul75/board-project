@@ -3,14 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import CommentItem from './CommentItem';
-import { UserInfo } from '@/app/detail/[id]/page';
-export interface DataType {
-  content: string;
-  author: string;
-  date: string;
-  _id: string;
-  email: string;
-}
+import { UserInfo, DataType } from '@/util/types';
 
 export default function Comment(props: { _id: number; session: null | UserInfo }) {
   const [comment, setComment] = useState('');

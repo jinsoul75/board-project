@@ -17,10 +17,10 @@ export default function Pagination({
 }: PaginationProps) {
   const totalPages = Math.ceil(totalPosts / pageSize);
 
-  const FloorFive = 5 * Math.floor(currentPage / 5);
+  const floorFive = 5 * Math.floor(currentPage / 5);
   const ceilFive = 5 * Math.ceil(currentPage / 5);
 
-  const prevPage = FloorFive - 4;
+  const prevPage = floorFive - 4;
   const nextPage = ceilFive + 1;
 
   const startPage = ceilFive - 4;
@@ -34,7 +34,7 @@ export default function Pagination({
         <Link
           key={i}
           href={{
-            pathname: `/${category}`,
+            pathname: `${category}`,
             query: { page: `${i}` },
           }}
           className={`text-center p-2 mx-1 rounded-full w-10 hover:bg-blue-300 hover:text-white  ${

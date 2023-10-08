@@ -1,11 +1,13 @@
-import { connectDB } from '@/util/database';
 import { getServerSession } from 'next-auth';
 import { ObjectId } from 'mongodb';
 import { redirect } from 'next/navigation';
 
-import ListItem, { Post } from '../../../components/post/ListItem';
+import { connectDB } from '@/util/database';
+import { Post } from '@/util/types';
+import { POST, FORUM } from '@/util/constants';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import ListItem from '../../../components/post/ListItem';
 
 export default async function MyLikes() {
   const session: { user: { id: string } } | null = await getServerSession(authOptions);
@@ -14,7 +16,7 @@ export default async function MyLikes() {
     redirect('/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F');
   }
 
-  const db = (await connectDB).db('forum');
+  const db = (await connectDB).db(FORUM);
 
   let likePosts = await db
     .collection('like')
@@ -26,7 +28,7 @@ export default async function MyLikes() {
     return likePost.pageId;
   });
 
-  let allPosts: Post[] = await db.collection<Post>('post').find().toArray();
+  let allPosts: Post[] = await db.collection<Post>(POST).find().toArray();
 
   allPosts = allPosts.map((post) => {
     post._id = post._id.toString() as unknown as string;
@@ -40,7 +42,7 @@ export default async function MyLikes() {
       {likedPosts.length === 0 ? (
         <div>좋아요한 게시글이 없어요!🥹</div>
       ) : (
-        <ListItem result={likedPosts} />
+        <ListItem posts={likedPosts} />
       )}
     </>
   );

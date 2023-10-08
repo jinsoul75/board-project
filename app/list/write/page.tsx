@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { redirect } from 'next/navigation';
 import { StyledLabel } from '../edit/[id]/page';
+import { FRONTEND, BACKEND } from '@/util/constants';
 
 export default async function write() {
   const session = await getServerSession(authOptions);
@@ -15,11 +16,11 @@ export default async function write() {
       <section>
         <form action="/api/post/new" method="POST" className="flex flex-col border p-4 mt-4">
           <h1 className="text-3xl font-bold">새글작성</h1>
-          <hr className='my-4'></hr>
+          <hr className="my-4"></hr>
           <StyledLabel htmlFor="category">카테고리</StyledLabel>
           <select className="border rounded-2xl p-2 w-40" id="category" name="category">
-            <option value="FRONTEND">프론트엔드</option>
-            <option value="BACKEND">백엔드</option>
+            <option value={FRONTEND}>프론트엔드</option>
+            <option value={BACKEND}>백엔드</option>
           </select>
           <StyledLabel htmlFor="title">제목</StyledLabel>
           <input

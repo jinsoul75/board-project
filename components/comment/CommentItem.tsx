@@ -4,8 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import tw from 'tailwind-styled-components';
-import { DataType } from '@/components/comment/Comment';
-import { UserInfo } from '@/app/detail/[id]/page';
+import { DataType,UserInfo } from '@/util/types';
 import dateFommatter from '@/util/dateFomatter';
 
 export default function CommentItem(props: {
