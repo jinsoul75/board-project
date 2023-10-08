@@ -16,7 +16,7 @@ export default function Aside({ banner }: { banner?: string }) {
           <StyledLink href="/list/my-likes?page=1">👍🏻 좋아요</StyledLink>
           <StyledLink
             className="bg-indigo-500 hover:bg-indigo-300 active:bg-indigo-400 p-2	text-white rounded-xl"
-            href="/write"
+            href="list/write"
           >
             ✏️ 작성하기
           </StyledLink>

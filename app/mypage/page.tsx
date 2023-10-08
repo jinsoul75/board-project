@@ -4,32 +4,31 @@ import Image from 'next/image';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/util/database';
 import Button from '@/components/common/Button';
-import ListItem, { Post } from '@/components/post/ListItem';
-interface Sessiontype {
-  user: {
-    name: string;
-    image: string;
-    email: string;
-    id: string;
-  };
-}
+import ListItem from '@/components/post/ListItem';
+import { Post } from '@/util/types';
+import { POST, FORUM } from '@/util/constants';
+import { UserInfo } from '@/util/types';
 
 export default async function Mypage() {
-  const session: Sessiontype | null = await getServerSession(authOptions);
+  const session: UserInfo | null = await getServerSession(authOptions);
 
   if (!session) {
     redirect('/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F');
   }
 
-  const db = (await connectDB).db('forum');
-  let result: Post[] = await db.collection<Post>('post').find().sort({ date: -1 }).toArray();
-  result = result.map((d) => {
-    d._id = d._id.toString() as unknown as string;
-    return d;
+  const db = (await connectDB).db(FORUM);
+
+  let posts: Post[] = await db.collection<Post>(POST).find().sort({ date: -1 }).toArray();
+  
+  posts = posts.map((post) => {
+    post._id = post._id.toString() as unknown as string;
+    return post;
   });
-  let myResult: Post[] = [];
+
+  let myPosts: Post[] = [];
+
   if (session) {
-    myResult = result.filter((d) => d.email === session.user?.email);
+    myPosts = posts.filter((post) => post.email === session.user?.email);
   }
 
   return (
@@ -59,7 +58,7 @@ export default async function Mypage() {
           ) : (
             <div className="flex flex-col items-center border mt-5">
               <div className="text-2xl font-bold m-5">내가 쓴 글</div>
-              <ListItem result={myResult} />
+              <ListItem posts={myPosts} />
             </div>
           )}
         </div>
